@@ -1,0 +1,2198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="preload" href="fonts/4cf2300e9c8272f7-s.p.woff2" as="font" crossorigin="" type="font/woff2"/>
+    <link rel="preload" href="fonts/93f479601ee12b01-s.p.woff2" as="font" crossorigin="" type="font/woff2"/>
+    <link rel="stylesheet" href="css/de70bee13400563f.css" data-precedence="next"/>
+    <link rel="stylesheet" href="css/a31caa6d517f7e69.css" data-precedence="next"/>
+    <title>Fortnite Private – Vision®</title>
+    <meta name="description" content="Premium Fortnite cheat with advanced aimbot, visuals, and radar features for competitive gameplay."/>
+    <script type="module" src="https://public.sellhub.cx/embeds.js"></script>
+    <style>
+        /* Hide scrollbar */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        html {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Canvas animation effect */
+        canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 50;
+            mix-blend-mode: screen;
+        }
+        
+        /* Hide loader after page loads */
+        .loader-container {
+            opacity: 1;
+            transition: opacity 0.3s ease-out;
+        }
+        
+        .loader-container.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Custom theme color #EEEEEE */
+        .theme-accent {
+            color: #EEEEEE;
+        }
+        
+        /* Redeem License Modal */
+        .redeem-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .redeem-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .redeem-modal-content {
+            background: linear-gradient(to bottom, rgba(24, 24, 27, 0.95), rgba(9, 9, 11, 0.95));
+            border: 1px solid rgba(63, 63, 70, 0.5);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        
+        .redeem-modal.active .redeem-modal-content {
+            transform: scale(1);
+        }
+        
+        /* Launch Warning Modal */
+        .launch-warning-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .launch-warning-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .launch-warning-modal-content {
+            background: linear-gradient(to bottom, rgba(24, 24, 27, 0.95), rgba(9, 9, 11, 0.95));
+            border: 1px solid rgba(63, 63, 70, 0.5);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        
+        .launch-warning-modal.active .launch-warning-modal-content {
+            transform: scale(1);
+        }
+        
+        /* Image Preview Modal */
+        .image-preview-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .image-preview-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .image-preview-modal-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 95vh;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-preview-modal.active .image-preview-modal-content {
+            transform: scale(1);
+        }
+        
+        .image-preview-container {
+            position: relative;
+        }
+        
+        .theme-bg {
+            background-color: #EEEEEE;
+        }
+        .theme-border {
+            border-color: #EEEEEE;
+        }
+        
+        /* Disable text/image selection */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Allow selection for input fields if needed */
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+    </style>
+</head>
+<body class="__variable_188709 __variable_9a8899 antialiased bg-zinc-950 text-[#ededed]">
+    <div hidden="">
+        <!--$-->
+        <!--/$-->
+    </div>
+    
+    <!-- Canvas for visual effects -->
+    <canvas id="canvas" class="fixed inset-0 pointer-events-none z-50 mix-blend-screen" style="width:100%;height:100%"></canvas>
+    
+    <!-- Loader -->
+    <div class="loader-container absolute inset-0 flex items-center justify-center z-40">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-loader h-6 w-6 text-zinc-400 animate-spin" aria-hidden="true">
+            <path d="M12 2v4"></path>
+            <path d="m16.2 7.8 2.9-2.9"></path>
+            <path d="M18 12h4"></path>
+            <path d="m16.2 16.2 2.9 2.9"></path>
+            <path d="M12 18v4"></path>
+            <path d="m4.9 19.1 2.9-2.9"></path>
+            <path d="M2 12h4"></path>
+            <path d="m4.9 4.9 2.9 2.9"></path>
+        </svg>
+    </div>
+    
+    <!-- Toast container -->
+    <div class="fixed top-4 right-4 z-50 flex flex-col space-y-3 pointer-events-none"></div>
+    
+    <!-- Navigation Header -->
+    <header class="bg-zinc-900/40 backdrop-blur-xl border-b border-zinc-800/30 sticky top-0 z-50">
+        <div class="max-w-7xl p-2 mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Left Section: Logo and Title -->
+                <a href="index.html" class="group flex items-center space-x-3">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#EEEEEE]/20 to-[#EEEEEE]/20 rounded-xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="relative p-2.5 bg-gradient-to-br from-zinc-500/10 to-zinc-400/10 rounded-xl border border-zinc-500/20 group-hover:border-zinc-500/40 transition-all duration-300">
+                            <div class="w-7 h-7 bg-gradient-to-br from-zinc-400 to-zinc-300 rounded-lg flex items-center justify-center">
+                                <span class="text-white text-xl font-bold transform -rotate-12">V</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden sm:block">
+                        <h1 class="text-lg font-bold text-zinc-100 group-hover:text-zinc-300 transition-colors duration-300">Vision®</h1>
+                        <p class="text-xs text-zinc-500 -mt-0.5">Unleash the power, dominate every game.</p>
+                    </div>
+                </a>
+                
+                <!-- Right Section: Navigation Buttons -->
+                <nav class="flex items-center space-x-2">
+                    <!-- Dashboard Button -->
+                    <a href="index.html" class="flex items-center justify-center space-x-0 md:space-x-2 p-2 md:px-3 md:py-2 text-sm font-medium text-zinc-300 hover:text-white bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-700 rounded-lg transition-all duration-200 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span class="hidden md:inline">Dashboard</span>
+                    </a>
+                    
+                    <!-- Settings Button -->
+                    <a href="settings.html" class="flex items-center justify-center space-x-0 md:space-x-2 p-2 md:px-3 md:py-2 text-sm font-medium text-zinc-300 hover:text-white bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-700 rounded-lg transition-all duration-200 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                            <line x1="4" y1="21" x2="4" y2="14"></line>
+                            <line x1="4" y1="10" x2="4" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12" y2="3"></line>
+                            <line x1="20" y1="21" x2="20" y2="16"></line>
+                            <line x1="20" y1="12" x2="20" y2="3"></line>
+                            <line x1="1" y1="14" x2="7" y2="14"></line>
+                            <line x1="9" y1="8" x2="15" y2="8"></line>
+                            <line x1="17" y1="16" x2="23" y2="16"></line>
+                        </svg>
+                        <span class="hidden md:inline">Settings</span>
+                    </a>
+                    
+                    <!-- Changelog Button -->
+                    <a href="changelog.html" class="flex items-center justify-center space-x-0 md:space-x-2 p-2 md:px-3 md:py-2 text-sm font-medium text-zinc-300 hover:text-white bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-700 rounded-lg transition-all duration-200 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <span class="hidden md:inline">Changelog</span>
+                    </a>
+                    
+                    <!-- Key Four Button with Dropdown -->
+                    <div class="relative group" id="profileDropdownContainer">
+                        <button id="profileButton" onclick="toggleProfileDropdown()" class="cursor-pointer group flex items-center space-x-2 pl-1 pr-2 py-1 bg-zinc-900/50 hover:bg-zinc-900 border border-zinc-800/50 hover:border-zinc-800 rounded-lg transition-all duration-200">
+                            <div class="p-1 bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-lg border border-zinc-700/50 overflow-hidden relative h-7 w-7 flex items-center justify-center">
+                                <div class="w-5 h-5 rounded bg-[#EC4899] flex items-center justify-center">
+                                    <span id="userInitial" class="text-white text-xs font-bold">K</span>
+                                </div>
+                            </div>
+                            <span id="userDisplayName" class="text-sm font-medium text-zinc-300 group-hover:text-white max-w-[100px] truncate hidden sm:block">Key Four</span>
+                            <svg id="dropdownArrow" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 text-zinc-500 group-hover:text-zinc-400 transition-transform duration-200">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800/50 rounded-xl shadow-xl opacity-0 invisible transform translate-y-2 transition-all duration-200 origin-top-right z-50">
+                            <div class="py-2">
+                                <a href="history.html" class="w-full flex items-center space-x-3 px-4 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors duration-150">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400">
+                                        <path d="M3 3v18h18"></path>
+                                        <path d="m19 9-5 5-4-4-3 3"></path>
+                                    </svg>
+                                    <span>History</span>
+                                </a>
+                                <a href="sessions.html" class="w-full flex items-center space-x-3 px-4 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors duration-150">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400">
+                                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+                                        <line x1="16" x2="16" y1="2" y2="6"></line>
+                                        <line x1="8" x2="8" y1="2" y2="6"></line>
+                                        <line x1="3" x2="21" y1="10" y2="10"></line>
+                                    </svg>
+                                    <span>Sessions</span>
+                                </a>
+                                <div class="h-px bg-zinc-800 my-1"></div>
+                                <button onclick="handleLogout()" class="w-full flex items-center space-x-3 px-4 py-2.5 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/20 transition-colors duration-150">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" x2="9" y1="12" y2="12"></line>
+                                    </svg>
+                                    <span>Logout</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Window Control Buttons -->
+                    <button id="minimizeBtn" class="cursor-pointer flex items-center justify-center w-8 h-8 bg-zinc-800/50 hover:bg-zinc-700 border border-zinc-700/50 hover:border-zinc-600 rounded-lg transition-all duration-200 group" title="Minimize">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-400 group-hover:text-zinc-300">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    
+                    <button id="closeBtn" class="cursor-pointer flex items-center justify-center w-8 h-8 bg-zinc-800/50 hover:bg-red-600/20 border border-zinc-700/50 hover:border-red-600/50 rounded-lg transition-all duration-200 group" title="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-400 group-hover:text-red-400">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </nav>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500/20 to-transparent"></div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="flex-1 relative min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Back Button -->
+            <a href="index.html" class="mb-8 inline-flex items-center space-x-2 text-zinc-400 hover:text-zinc-200 transition-all duration-300 group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 transition-transform group-hover:-translate-x-1">
+                    <path d="m12 19-7-7 7-7"></path>
+                    <path d="M19 12H5"></path>
+                </svg>
+                <span class="text-sm font-medium">Back to Dashboard</span>
+            </a>
+
+            <!-- Main Grid Layout -->
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                <!-- Left Column: Main Product Content (2 columns on XL) -->
+                <div class="xl:col-span-2 space-y-8">
+                    <!-- Product Hero Card -->
+                    <div class="relative bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 backdrop-blur-xl rounded-3xl border border-zinc-700/50 overflow-hidden">
+                        <!-- Background Gradient Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-zinc-500/5 via-transparent to-purple-500/5 opacity-50"></div>
+                        
+                        <!-- Product Image -->
+                        <div class="relative aspect-video w-full overflow-hidden">
+                            <img src="images/fortniteprivate.jpg" alt="Fortnite Private" class="w-full h-full object-cover transition-all duration-500 scale-100" loading="eager"/>
+                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/95 via-zinc-900/20 to-transparent"></div>
+                            
+                            <!-- Status Badge -->
+                            <div class="absolute top-6 left-6">
+                                <div class="relative">
+                                    <div class="absolute inset-0 bg-emerald-500/10 blur-lg rounded-xl opacity-60"></div>
+                                    <div class="relative flex items-center space-x-2 px-4 py-2 bg-emerald-500/10 backdrop-blur-sm border border-emerald-500/30 rounded-xl">
+                                        <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                                        <span class="text-xs font-bold text-emerald-400">Undetected</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Info -->
+                        <div class="relative p-10">
+                            <!-- Title and Description -->
+                            <div class="mb-10">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <h1 class="text-4xl font-bold bg-gradient-to-r from-zinc-100 to-zinc-300 bg-clip-text text-transparent">Fortnite Private</h1>
+                                </div>
+                                <p class="text-xl text-zinc-400 leading-relaxed font-light">
+                                    Premium Fortnite cheat with advanced aimbot, visuals, and radar features for competitive gameplay.
+                                </p>
+                            </div>
+                            
+                            <!-- Creator and Release Date Cards -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <!-- Creator Card -->
+                                <div class="group">
+                                    <div class="relative p-6 bg-gradient-to-br from-zinc-800/50 to-zinc-800/30 rounded-2xl border border-zinc-700/50 hover:border-zinc-500/30 transition-all duration-300 hover:transform">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="p-3 bg-zinc-500/10 rounded-xl group-hover:bg-zinc-500/20 transition-colors">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-zinc-400">
+                                                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <div class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">Creator</div>
+                                                <div class="text-lg font-semibold text-zinc-200">Vision® Team</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Released Date Card -->
+                                <div class="group">
+                                    <div class="relative p-6 bg-gradient-to-br from-zinc-800/50 to-zinc-800/30 rounded-2xl border border-zinc-700/50 hover:border-zinc-500/30 transition-all duration-300 hover:transform">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="p-3 bg-zinc-500/10 rounded-xl group-hover:bg-zinc-500/20 transition-colors">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-zinc-400">
+                                                    <path d="M8 2v4"></path>
+                                                    <path d="M16 2v4"></path>
+                                                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                                    <path d="M3 10h18"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <div class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">LAST UPDATE</div>
+                                                <div class="text-lg font-semibold text-zinc-200">December 23, 2025</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Redeem License / Launch Button -->
+                            <div class="mt-10 sm:block hidden">
+                                <button id="redeemLaunchBtn" onclick="handleRedeemLaunchClick()" class="group flex items-center justify-center space-x-3 w-full px-6 py-4 text-zinc-400 hover:text-zinc-300 rounded-xl font-semibold text-lg transition-all duration-200 border border-zinc-500/20 hover:border-zinc-500/40 backdrop-blur-sm cursor-pointer hover:shadow-lg hover:shadow-zinc-500/25" style="background: linear-gradient(to right, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10));" onmouseover="this.style.background='linear-gradient(to right, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15))'" onmouseout="this.style.background='linear-gradient(to right, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10))'">
+                                    <svg id="redeemLaunchIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 transition-transform duration-200">
+                                        <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path>
+                                    </svg>
+                                    <span id="redeemLaunchText">Redeem License</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Section -->
+                    <div class="bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 backdrop-blur-xl rounded-3xl border border-zinc-700/50 overflow-hidden">
+                        <!-- Section Header -->
+                        <div class="p-8 border-b border-zinc-700/50 bg-gradient-to-r from-transparent via-zinc-500/5 to-transparent">
+                            <div class="flex items-center space-x-4">
+                                <div class="p-3 bg-gradient-to-br from-[#EEEEEE]/20 to-[#EEEEEE]/20 rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7 text-zinc-400">
+                                        <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                        <path d="m9 11 3 3L22 4"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl font-bold text-zinc-100">Features</h2>
+                                    <p class="text-zinc-400 text-sm">Comprehensive feature set for competitive advantage</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Features List -->
+                        <div class="p-8">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Feature 1 -->
+                                <div class="group relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-zinc-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                                    <div class="relative flex items-center space-x-4 p-5 bg-zinc-800/30 hover:bg-zinc-800/50 rounded-2xl transition-all duration-300 border border-zinc-700/50 hover:border-zinc-500/30 group-hover:transform">
+                                        <div class="p-2 bg-zinc-500/10 rounded-lg group-hover:bg-zinc-500/20 transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400 group-hover:scale-110 transition-transform duration-200">
+                                                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                                <path d="m9 11 3 3L22 4"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-zinc-300 group-hover:text-zinc-100 transition-colors">Aimbot</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Feature 2 -->
+                                <div class="group relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-zinc-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                                    <div class="relative flex items-center space-x-4 p-5 bg-zinc-800/30 hover:bg-zinc-800/50 rounded-2xl transition-all duration-300 border border-zinc-700/50 hover:border-zinc-500/30 group-hover:transform">
+                                        <div class="p-2 bg-zinc-500/10 rounded-lg group-hover:bg-zinc-500/20 transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400 group-hover:scale-110 transition-transform duration-200">
+                                                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                                <path d="m9 11 3 3L22 4"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-zinc-300 group-hover:text-zinc-100 transition-colors">Visuals</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Feature 3 -->
+                                <div class="group relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-zinc-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                                    <div class="relative flex items-center space-x-4 p-5 bg-zinc-800/30 hover:bg-zinc-800/50 rounded-2xl transition-all duration-300 border border-zinc-700/50 hover:border-zinc-500/30 group-hover:transform">
+                                        <div class="p-2 bg-zinc-500/10 rounded-lg group-hover:bg-zinc-500/20 transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400 group-hover:scale-110 transition-transform duration-200">
+                                                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                                <path d="m9 11 3 3L22 4"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-zinc-300 group-hover:text-zinc-100 transition-colors">Radar</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Feature 4 -->
+                                <div class="group relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-zinc-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                                    <div class="relative flex items-center space-x-4 p-5 bg-zinc-800/30 hover:bg-zinc-800/50 rounded-2xl transition-all duration-300 border border-zinc-700/50 hover:border-zinc-500/30 group-hover:transform">
+                                        <div class="p-2 bg-zinc-500/10 rounded-lg group-hover:bg-zinc-500/20 transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400 group-hover:scale-110 transition-transform duration-200">
+                                                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                                <path d="m9 11 3 3L22 4"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-zinc-300 group-hover:text-zinc-100 transition-colors">Weapon Configuration</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Feature 5 -->
+                                <div class="group relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-zinc-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                                    <div class="relative flex items-center space-x-4 p-5 bg-zinc-800/30 hover:bg-zinc-800/50 rounded-2xl transition-all duration-300 border border-zinc-700/50 hover:border-zinc-500/30 group-hover:transform">
+                                        <div class="p-2 bg-zinc-500/10 rounded-lg group-hover:bg-zinc-500/20 transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400 group-hover:scale-110 transition-transform duration-200">
+                                                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                                <path d="m9 11 3 3L22 4"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-zinc-300 group-hover:text-zinc-100 transition-colors">Exploits</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Feature 6 -->
+                                <div class="group relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-zinc-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                                    <div class="relative flex items-center space-x-4 p-5 bg-zinc-800/30 hover:bg-zinc-800/50 rounded-2xl transition-all duration-300 border border-zinc-700/50 hover:border-zinc-500/30 group-hover:transform">
+                                        <div class="p-2 bg-zinc-500/10 rounded-lg group-hover:bg-zinc-500/20 transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400 group-hover:scale-110 transition-transform duration-200">
+                                                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                                <path d="m9 11 3 3L22 4"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-zinc-300 group-hover:text-zinc-100 transition-colors">Settings</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Widgets (1 column on XL) -->
+                <div class="widget space-y-8">
+                    <!-- Subscription Widget -->
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-3xl border border-zinc-800/50 overflow-hidden relative">
+                        <div class="p-6 border-b border-zinc-800/50 bg-gradient-to-r from-transparent via-zinc-500/5 to-transparent">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="p-2 bg-zinc-500/10 rounded-xl">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                            <line x1="19" x2="19" y1="8" y2="14"></line>
+                                            <line x1="22" x2="16" y1="11" y2="11"></line>
+                                        </svg>
+                                    </div>
+                                    <h2 class="text-xl font-bold text-zinc-100">Subscription</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <!-- No Subscription State -->
+                            <div id="noSubscription" class="flex flex-col items-center justify-center text-center space-y-4 py-8">
+                                <div class="p-3 bg-zinc-800/30 rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <line x1="19" x2="19" y1="8" y2="14"></line>
+                                        <line x1="22" x2="16" y1="11" y2="11"></line>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-zinc-100 mb-2">No active subscription</h3>
+                                    <p class="text-sm text-zinc-400">You don't have a subscription for this software</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Active Subscription State -->
+                            <div id="activeSubscription" class="hidden space-y-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                                        <span class="text-sm font-medium text-emerald-400">Active</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Time Left -->
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm font-medium text-zinc-400">Time Left</span>
+                                        <span id="timeLeft" class="text-lg font-bold text-zinc-100">--</span>
+                                    </div>
+                                    
+                                    <!-- Progress Bar -->
+                                    <div class="w-full bg-zinc-800/50 rounded-full h-2 overflow-hidden">
+                                        <div id="timeProgress" class="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Expiry Date -->
+                                <div class="pt-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-medium text-zinc-500 uppercase tracking-wider">Expiry Date</span>
+                                        <span id="expiryDate" class="text-sm font-semibold text-zinc-300">--</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Log Out Button -->
+                                <div class="pt-4 border-t border-zinc-800/50">
+                                    <button onclick="logoutSubscription()" class="w-full px-4 py-2.5 text-sm font-medium text-zinc-300 hover:text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-600 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                            <polyline points="16 17 21 12 16 7"></polyline>
+                                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                                        </svg>
+                                        <span>Log out</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Online Players Widget -->
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-3xl border border-zinc-800/50 overflow-hidden relative">
+                        <div class="p-6 border-b border-zinc-800 bg-gradient-to-r from-green-500/0 via-green-500/10 to-green-500/0">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-green-500/10 rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-green-400">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </div>
+                                <h2 class="text-xl font-bold text-zinc-100">Online Players</h2>
+                            </div>
+                        </div>
+                        <div class="p-4 sm:p-6">
+                            <div class="flex items-center justify-between p-3 sm:p-4 bg-zinc-900/50 backdrop-blur-sm rounded-xl border border-zinc-800/50">
+                                <div class="flex items-center space-x-3 relative">
+                                    <span class="relative flex h-3 w-3">
+                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                                    </span>
+                                    <span class="text-sm font-medium text-zinc-400">Online Now</span>
+                                </div>
+                                <div class="flex items-baseline space-x-1 ml-2 sm:ml-4">
+                                    <div class="px-3 py-1 bg-green-600/10 border border-green-600/20 rounded-lg">
+                                        <span class="text-lg sm:text-xl font-extrabold text-green-400 tracking-tight">52</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tutorials/Video Widget -->
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-3xl border border-zinc-800/50 overflow-hidden relative">
+                        <div class="p-6 border-b border-zinc-800/50 bg-gradient-to-r from-transparent via-zinc-500/5 to-transparent">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-zinc-500/10 rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400">
+                                        <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"></path>
+                                        <rect x="2" y="6" width="14" height="12" rx="2"></rect>
+                                    </svg>
+                                </div>
+                                <h2 class="text-xl font-bold text-zinc-100">Tutorials</h2>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="aspect-video rounded-2xl overflow-hidden bg-zinc-800/50">
+                                <iframe src="https://www.youtube-nocookie.com/embed/dZNOpioB6eg?rel=0&modestbranding=1&enablejsapi=1" class="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Disable status bar (link preview in bottom left corner)
+        // Override window.status to prevent link URLs from showing
+        Object.defineProperty(window, 'status', {
+            get: function() { return ''; },
+            set: function() { return ''; }
+        });
+        
+        // Prevent status bar updates on all mouse events
+        document.addEventListener('mouseover', function(e) {
+            window.status = '';
+            if (e.target.tagName === 'A' || e.target.closest('a') || e.target.closest('button')) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
+        
+        document.addEventListener('mousemove', function(e) {
+            window.status = '';
+        }, true);
+        
+        // Remove href attributes temporarily on hover to prevent status bar
+        document.addEventListener('mouseenter', function(e) {
+            if (e.target.tagName === 'A' && e.target.href) {
+                e.target.setAttribute('data-href-backup', e.target.href);
+                e.target.removeAttribute('href');
+            }
+        }, true);
+        
+        document.addEventListener('mouseleave', function(e) {
+            if (e.target.tagName === 'A' && e.target.hasAttribute('data-href-backup')) {
+                e.target.href = e.target.getAttribute('data-href-backup');
+                e.target.removeAttribute('data-href-backup');
+            }
+        }, true);
+        
+        // Override default link behavior
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (link && link.hasAttribute('data-href-backup')) {
+                e.preventDefault();
+                const href = link.getAttribute('data-href-backup');
+                if (href) {
+                    window.location.href = href;
+                }
+            }
+        }, true);
+        
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Disable keyboard shortcuts (DevTools, View Source, etc.)
+        document.addEventListener('keydown', function(e) {
+            // Disable F12 (DevTools)
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+I (DevTools)
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+J (Console)
+            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+C (Inspect Element)
+            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+U (View Source)
+            if (e.ctrlKey && e.key === 'U') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+S (Save Page)
+            if (e.ctrlKey && e.key === 'S') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+P (Print)
+            if (e.ctrlKey && e.key === 'P') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+P (Command Palette in DevTools)
+            if (e.ctrlKey && e.shiftKey && e.key === 'P') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+Delete (Clear browsing data)
+            if (e.ctrlKey && e.shiftKey && e.key === 'Delete') {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        // Disable text selection via mouse drag
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Disable drag and drop
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Canvas snow animation effect (from Vision®)
+        (function() {
+            const canvas = document.getElementById('canvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+            
+            let animationId;
+            const particles = [];
+            
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            function initParticles() {
+                const particleCount = Math.floor(window.innerWidth * window.innerHeight / 25000);
+                particles.length = 0;
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: 2 * Math.random() + 0.5,
+                        speed: 1.5 * Math.random() + 0.5,
+                        wind: 0.5 * Math.random() - 0.25,
+                        opacity: 0.5 * Math.random() + 0.3
+                    });
+                }
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.radius, 0, 2 * Math.PI);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+                    ctx.fill();
+                    
+                    particle.y += particle.speed;
+                    particle.x += particle.wind;
+                    
+                    if (particle.y > canvas.height) {
+                        particle.y = -5;
+                        particle.x = Math.random() * canvas.width;
+                    }
+                    
+                    if (particle.x > canvas.width) {
+                        particle.x = 0;
+                    } else if (particle.x < 0) {
+                        particle.x = canvas.width;
+                    }
+                });
+                
+                animationId = requestAnimationFrame(animate);
+            }
+            
+            resizeCanvas();
+            initParticles();
+            animate();
+            
+            window.addEventListener('resize', function() {
+                resizeCanvas();
+                initParticles();
+            });
+        })();
+        
+        // Hide loader after page loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loader = document.querySelector('.loader-container');
+                if (loader) {
+                    loader.classList.add('hidden');
+                }
+            }, 500);
+        });
+    </script>
+    
+    <!-- Footer -->
+    <footer class="relative mt-16">
+        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500/20 to-transparent"></div>
+        <div class="pt-8 md:pt-12 px-4">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col items-center gap-8 md:grid md:grid-cols-3 md:gap-12 mb-8">
+                    <!-- Left Section: Logo and Copyright -->
+                    <div class="flex flex-col items-center md:items-start space-y-4">
+                        <div class="group">
+                            <div class="flex items-center gap-3">
+                                <div class="relative hidden md:block w-[52px] h-[52px]">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-[#EEEEEE]/20 to-[#EEEEEE]/20 rounded-xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    <div class="relative p-2.5 bg-gradient-to-br from-zinc-500/10 to-zinc-400/10 rounded-xl border border-zinc-500/20 group-hover:border-zinc-500/40 transition-all duration-300">
+                                        <div class="w-7 h-7 bg-gradient-to-br from-zinc-400 to-zinc-300 rounded-lg flex items-center justify-center">
+                                            <span class="text-white text-xl font-bold transform -rotate-12">V</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center md:text-left min-w-[180px]">
+                                    <h2 class="text-lg font-bold text-zinc-100 group-hover:text-zinc-300 transition-colors duration-300">Vision®</h2>
+                                    <p class="text-xs text-zinc-500 -mt-0.5">© 2026 Vision®. All rights reserved.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Middle Section: Policies -->
+                    <div class="flex flex-col items-center md:items-start space-y-3 min-h-[60px] justify-center">
+                        <div class="flex flex-col items-center md:items-start gap-2">
+                            <a href="/policies/privacy" class="text-sm text-zinc-400 hover:text-zinc-400 transition-colors duration-200">Privacy Policy</a>
+                            <a href="/policies/refund" class="text-sm text-zinc-400 hover:text-zinc-400 transition-colors duration-200">Refund Policy</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Section: Social Media Icons -->
+                    <div class="flex flex-col items-center md:items-end min-h-[60px] justify-center">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <!-- Discord -->
+                            <a href="https://discord.gg/visondevelopment" target="_blank" rel="noopener noreferrer" class="p-3 bg-zinc-900/30 backdrop-blur-sm rounded-lg border border-zinc-800/30 text-zinc-400 hover:text-zinc-400 hover:border-zinc-500/20 transition-all duration-200 active:scale-95 w-10 h-10 flex items-center justify-center" aria-label="Discord">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4">
+                                    <path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.078.037c-.211.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.434 0 12.522 12.522 0 0 0-.617-1.25.077.077 0 0 0-.078-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.02.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.105 13.123 13.123 0 0 1-1.882-.9.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.1.246.199.373.293a.077.077 0 0 1-.006.128 12.516 12.516 0 0 1-1.883.898.076.076 0 0 0-.04.106c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .084.028 19.876 19.876 0 0 0 6.002-3.02.076.076 0 0 0 .031-.055c.5-5.177-.838-9.673-3.548-13.662a.061.061 0 0 0-.031-.028ZM8.02 15.334c-1.183 0-2.157-1.086-2.157-2.419 0-1.332.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.419 0 1.333-.956 2.419-2.157 2.419Zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.332.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.419 0 1.333-.947 2.419-2.157 2.419Z"></path>
+                                </svg>
+                            </a>
+                            
+                            <!-- Telegram -->
+                            <a href="#" class="p-3 bg-zinc-900/30 backdrop-blur-sm rounded-lg border border-zinc-800/30 text-zinc-400 hover:text-zinc-400 hover:border-zinc-500/20 transition-all duration-200 active:scale-95 w-10 h-10 flex items-center justify-center" aria-label="Telegram">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.479 2 12s4.48 10 10 10 10-4.479 10-10S17.52 2 12 2Zm4.83 6.47-1.92 9.06c-.14.64-.52.79-1.05.49l-2.9-2.14-1.4 1.35c-.16.16-.3.3-.6.3l.21-3.02 5.49-4.95c.24-.21-.05-.33-.37-.12l-6.78 4.27-2.92-.91c-.64-.2-.65-.64.13-.95l11.42-4.4c.53-.19.99.13.82.94Z"></path>
+                                </svg>
+                            </a>
+                            
+                            <!-- Instagram -->
+                            <a href="#" class="p-3 bg-zinc-900/30 backdrop-blur-sm rounded-lg border border-zinc-800/30 text-zinc-400 hover:text-zinc-400 hover:border-zinc-500/20 transition-all duration-200 active:scale-95 w-10 h-10 flex items-center justify-center" aria-label="Instagram">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+                                </svg>
+                            </a>
+                            
+                            <!-- YouTube -->
+                            <a href="https://www.youtube.com/@vision-development" target="_blank" rel="noopener noreferrer" class="p-3 bg-zinc-900/30 backdrop-blur-sm rounded-lg border border-zinc-800/30 text-zinc-400 hover:text-zinc-400 hover:border-zinc-500/20 transition-all duration-200 active:scale-95 w-10 h-10 flex items-center justify-center" aria-label="YouTube">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-24 bg-zinc-500/5 rounded-full blur-3xl pointer-events-none"></div>
+    </footer>
+    
+    <!-- Redeem License Modal -->
+    <div id="redeemModal" class="redeem-modal" onclick="if(event.target === this) closeRedeemModal()">
+        <div class="redeem-modal-content">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-zinc-100">Redeem License</h2>
+                <button onclick="closeRedeemModal()" class="p-2 hover:bg-zinc-800/50 rounded-lg transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400 hover:text-zinc-300">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div id="usernameFieldContainer">
+                    <label class="block text-sm font-medium text-zinc-300 mb-2">Username</label>
+                    <input type="text" id="redeemUsername" placeholder="Enter your username" class="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700/50 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-zinc-500/50 focus:ring-2 focus:ring-zinc-500/20 transition-all">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-zinc-300 mb-2">License Key</label>
+                    <input type="text" id="licenseKey" placeholder="Enter your license key" class="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700/50 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-zinc-500/50 focus:ring-2 focus:ring-zinc-500/20 transition-all">
+                </div>
+                <div id="redeemResult" class="hidden">
+                    <div id="redeemMessage" class="px-4 py-3 rounded-lg text-sm font-medium"></div>
+                </div>
+                <button id="redeemBtn" onclick="redeemLicense()" class="w-full px-6 py-3 text-zinc-400 hover:text-zinc-300 rounded-xl font-semibold text-lg transition-all duration-200 border border-zinc-500/20 hover:border-zinc-500/40 backdrop-blur-sm cursor-pointer hover:shadow-lg hover:shadow-zinc-500/25" style="background: linear-gradient(to right, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10));" onmouseover="this.style.background='linear-gradient(to right, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15))'" onmouseout="this.style.background='linear-gradient(to right, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10))'">
+                    Redeem
+                </button>
+                <div class="mt-4 pt-4 border-t border-zinc-800/30">
+                    <button data-sellhub-product="ac3ab96d-c3d5-4ebd-b9a2-d380def5adbb" class="w-full flex items-center justify-center gap-2 text-sm text-zinc-400 hover:text-zinc-300 underline decoration-zinc-600 hover:decoration-zinc-400 transition-all duration-200 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                            <circle cx="8" cy="21" r="1"></circle>
+                            <circle cx="19" cy="21" r="1"></circle>
+                            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                        </svg>
+                        <span>Don't have a License? Purchase it now!</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Launch Warning Modal -->
+    <div id="launchWarningModal" class="launch-warning-modal" onclick="if(event.target === this) closeLaunchWarningModal()">
+        <div class="launch-warning-modal-content">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-zinc-100">Important Information</h2>
+                <button onclick="closeLaunchWarningModal()" class="p-2 hover:bg-zinc-800/50 rounded-lg transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400 hover:text-zinc-300">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-6">
+                <div>
+                    <p class="text-zinc-300 mb-4">
+                        If the cheat overlay is acting sketchy with low FPS, you need to disable additional overlays from other applications. Below are examples for Fortnite and Discord.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="border border-zinc-700/50 rounded-xl overflow-hidden bg-zinc-900/30 relative cursor-zoom-in image-preview-container" onclick="openImagePreview('images/1.png', 'Fortnite Overlay Settings')">
+                            <img src="images/1.png" alt="Fortnite Overlay Settings" class="w-full h-auto transition-opacity duration-200">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/20 transition-all duration-200 opacity-0 hover:opacity-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-white">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.35-4.35"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="border border-zinc-700/50 rounded-xl overflow-hidden bg-zinc-900/30 relative cursor-zoom-in image-preview-container" onclick="openImagePreview('images/2.png', 'Discord Overlay Settings')">
+                            <img src="images/2.png" alt="Discord Overlay Settings" class="w-full h-auto transition-opacity duration-200">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/20 transition-all duration-200 opacity-0 hover:opacity-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-white">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.35-4.35"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-yellow-500/20 border border-yellow-500/30 rounded-xl p-4 flex items-start gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5">
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                        <path d="M12 9v4"></path>
+                        <path d="M12 17h.01"></path>
+                    </svg>
+                    <p class="text-yellow-300 text-sm">
+                        If you received a 24h ban, don't worry. After 24 hours have passed, your account will be unbanned. Make sure to leave a review, enjoy your game ;)
+                    </p>
+                </div>
+                <button id="launchBtn" onclick="executeLaunch()" class="w-full px-6 py-3 bg-gradient-to-r from-zinc-700/50 to-zinc-800/50 hover:from-zinc-600/50 hover:to-zinc-700/50 text-zinc-100 rounded-xl font-semibold text-lg transition-all duration-200 border border-zinc-500/20 hover:border-zinc-500/40 backdrop-blur-sm cursor-pointer hover:shadow-lg hover:shadow-zinc-500/25 flex items-center justify-center gap-2">
+                    <span id="launchBtnText">I Understand, Launch</span>
+                    <span id="launchBtnLoader" class="hidden flex items-center justify-center gap-2">
+                        <svg class="animate-spin h-5 w-5 text-zinc-100" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span>Launching...</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Image Preview Modal -->
+    <div id="imagePreviewModal" class="image-preview-modal" onclick="if(event.target === this) closeImagePreview()">
+        <div class="image-preview-modal-content" onclick="event.stopPropagation()">
+            <button onclick="closeImagePreview()" class="absolute top-4 right-4 p-2 hover:bg-zinc-800/50 rounded-lg transition-colors z-10 bg-zinc-900/80 backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400 hover:text-zinc-300">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <img id="previewImage" src="" alt="" class="max-w-full max-h-[90vh] w-auto h-auto rounded-lg">
+            <p id="previewImageTitle" class="mt-4 text-center text-zinc-300 text-sm"></p>
+        </div>
+    </div>
+    
+    <script>
+        function openRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            const usernameFieldContainer = document.getElementById('usernameFieldContainer');
+            const redeemUsername = document.getElementById('redeemUsername');
+            
+            // Check if username already exists in localStorage
+            const userData = localStorage.getItem('vision_user_data');
+            if (userData) {
+                const data = JSON.parse(userData);
+                if (data.username && data.username !== 'Guest' && data.username !== 'Key Four') {
+                    // Hide username field if username already exists
+                    if (usernameFieldContainer) {
+                        usernameFieldContainer.style.display = 'none';
+                    }
+                    // Set username value from localStorage
+                    if (redeemUsername) {
+                        redeemUsername.value = data.username;
+                    }
+                } else {
+                    // Show username field if no custom username
+                    if (usernameFieldContainer) {
+                        usernameFieldContainer.style.display = 'block';
+                    }
+                    if (redeemUsername) {
+                        redeemUsername.value = '';
+                    }
+                }
+            } else {
+                // Show username field if no user data
+                if (usernameFieldContainer) {
+                    usernameFieldContainer.style.display = 'block';
+                }
+                if (redeemUsername) {
+                    redeemUsername.value = '';
+                }
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeRedeemModal() {
+            document.getElementById('redeemModal').classList.remove('active');
+            document.body.style.overflow = '';
+            document.getElementById('licenseKey').value = '';
+            // Reset button to Redeem
+            const redeemBtn = document.getElementById('redeemBtn');
+            if (redeemBtn) {
+                redeemBtn.textContent = 'Redeem';
+                redeemBtn.onclick = redeemLicense;
+                redeemBtn.disabled = false;
+            }
+        }
+        
+        function handleRedeemLaunchClick() {
+            // Check if subscription is active
+            const subscriptionActive = localStorage.getItem('fortnite_subscription_active');
+            const expiredate = localStorage.getItem('fortnite_subscription_expiredate');
+            
+            // Check if subscription is active and valid
+            let isActive = false;
+            if (subscriptionActive === 'true') {
+                if (expiredate && expiryTimestamp) {
+                    // Check if subscription is still valid (not expired)
+                    const now = Date.now();
+                    const timeLeft = expiryTimestamp - now;
+                    isActive = timeLeft > 0;
+                } else {
+                    // No expiredate or expiryTimestamp not set yet, but subscription is active - treat as active
+                    // This handles the case when a new session starts after redeeming a license
+                    isActive = true;
+                }
+            }
+            
+            if (isActive) {
+                // Subscription is active - launch game
+                launchGame();
+            } else {
+                // No active subscription - open redeem modal
+                openRedeemModal();
+            }
+        }
+        
+        function launchGame() {
+            // Show launch warning modal before launching
+            openLaunchWarningModal();
+        }
+        
+        function openLaunchWarningModal() {
+            const modal = document.getElementById('launchWarningModal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        function closeLaunchWarningModal() {
+            const modal = document.getElementById('launchWarningModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            // Reset launch button state
+            const launchBtn = document.getElementById('launchBtn');
+            const launchBtnText = document.getElementById('launchBtnText');
+            const launchBtnLoader = document.getElementById('launchBtnLoader');
+            
+            if (launchBtn) {
+                launchBtn.disabled = false;
+                launchBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                launchBtn.classList.add('hover:from-zinc-600/50', 'hover:to-zinc-700/50', 'hover:shadow-lg', 'cursor-pointer');
+            }
+            
+            if (launchBtnText) {
+                launchBtnText.classList.remove('hidden');
+            }
+            
+            if (launchBtnLoader) {
+                launchBtnLoader.classList.add('hidden');
+            }
+        }
+        
+        function openImagePreview(imageSrc, imageTitle) {
+            const modal = document.getElementById('imagePreviewModal');
+            const previewImage = document.getElementById('previewImage');
+            const previewTitle = document.getElementById('previewImageTitle');
+            
+            if (modal && previewImage && previewTitle) {
+                previewImage.src = imageSrc;
+                previewTitle.textContent = imageTitle;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        function closeImagePreview() {
+            const modal = document.getElementById('imagePreviewModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        function executeLaunch() {
+            const launchBtn = document.getElementById('launchBtn');
+            const launchBtnText = document.getElementById('launchBtnText');
+            const launchBtnLoader = document.getElementById('launchBtnLoader');
+            
+            // Show loading state
+            if (launchBtn) {
+                launchBtn.disabled = true;
+                launchBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                launchBtn.classList.remove('hover:from-zinc-600/50', 'hover:to-zinc-700/50', 'hover:shadow-lg', 'cursor-pointer');
+            }
+            
+            // Hide text and show loader
+            if (launchBtnText) {
+                launchBtnText.classList.add('hidden');
+            }
+            
+            if (launchBtnLoader) {
+                launchBtnLoader.classList.remove('hidden');
+            }
+            
+            // Launch game logic here
+            console.log('Downloading and launching game...');
+            
+            // Save last launch time
+            localStorage.setItem('fortnite_last_launch_time', Date.now().toString());
+            
+            // Log launch action
+            if (typeof logHistory === 'function') {
+                logHistory('launch', 'Fortnite Private');
+            }
+            
+            // Send message to C++ loader to download and launch the game
+            // C++ loader should:
+            // 1. Expand savePath to full path (e.g., %LOCALAPPDATA%\vision\fortnite)
+            // 2. Download loaderUrl (.bin) and save as loaderFileName (.exe) in savePath
+            // 3. Download vmpUrl (.dll) and save as vmpFileName in same folder
+            // 4. Launch the loaderFileName
+            if (window.chrome && window.chrome.webview && window.chrome.webview.postMessage) {
+                window.chrome.webview.postMessage(JSON.stringify({ 
+                    action: 'download_and_launch',
+                    product: 'fortnite',
+                    loaderUrl: 'https://files.catbox.moe/frjrhs.bin',
+                    loaderFileName: 'FortniteLoader.exe',
+                    vmpUrl: 'https://files.catbox.moe/d3bf2o.dll',
+                    vmpFileName: 'VMProtectSDK64.dll',
+                    savePath: 'appdata/vision/fortnite'
+                }));
+                
+                // Keep modal open to show loading state
+                // Modal will close when C++ loader closes the window
+            } else {
+                alert('Game launch available only in Loader application.');
+                
+                // Reset button state on error
+                if (launchBtn) {
+                    launchBtn.disabled = false;
+                    launchBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                    launchBtn.classList.add('hover:from-zinc-600/50', 'hover:to-zinc-700/50', 'hover:shadow-lg', 'cursor-pointer');
+                }
+                if (launchBtnText) {
+                    launchBtnText.classList.remove('hidden');
+                }
+                if (launchBtnLoader) {
+                    launchBtnLoader.classList.add('hidden');
+                }
+            }
+        }
+        
+        function updateRedeemButton() {
+            const button = document.getElementById('redeemLaunchBtn');
+            const buttonText = document.getElementById('redeemLaunchText');
+            const buttonIcon = document.getElementById('redeemLaunchIcon');
+            
+            if (!button || !buttonText || !buttonIcon) return;
+            
+            const subscriptionActive = localStorage.getItem('fortnite_subscription_active');
+            const expiredate = localStorage.getItem('fortnite_subscription_expiredate');
+            
+            // Check if subscription is active and valid
+            let isActive = false;
+            if (subscriptionActive === 'true') {
+                if (expiredate && expiryTimestamp) {
+                    // Check if subscription is still valid (not expired)
+                    const now = Date.now();
+                    const timeLeft = expiryTimestamp - now;
+                    isActive = timeLeft > 0;
+                } else {
+                    // No expiredate or expiryTimestamp not set yet, but subscription is active - treat as active
+                    // This handles the case when a new session starts after redeeming a license
+                    isActive = true;
+                }
+            }
+            
+            if (isActive) {
+                // Change to Launch button
+                buttonText.textContent = 'Launch';
+                // Change icon to play icon
+                buttonIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+            } else {
+                // Change to Redeem License button
+                buttonText.textContent = 'Redeem License';
+                // Change icon back to key/license icon
+                buttonIcon.innerHTML = '<path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path>';
+            }
+        }
+        
+        // License validation for product pages
+        (function() {
+            // Check if we're in WebView2
+            if (window.chrome && window.chrome.webview) {
+                // Listen for responses from C++
+                window.chrome.webview.addEventListener('message', function(event) {
+                    console.log('Received message:', event.data);
+                    try {
+                        const response = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+                        const redeemResult = document.getElementById('redeemResult');
+                        const redeemMessage = document.getElementById('redeemMessage');
+                        const redeemBtn = document.getElementById('redeemBtn');
+                        
+                        // Restore button
+                        if (redeemBtn) {
+                            redeemBtn.disabled = false;
+                            redeemBtn.textContent = 'Redeem';
+                        }
+                        
+                        // Show result
+                        if (redeemResult && redeemMessage) {
+                            redeemResult.classList.remove('hidden');
+                            
+                            if (response.success) {
+                                redeemMessage.textContent = response.message || 'License is valid!';
+                                redeemMessage.className = 'px-4 py-3 rounded-lg text-sm font-medium bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+                                
+                                // Change button to Continue
+                                if (redeemBtn) {
+                                    redeemBtn.textContent = 'Continue';
+                                    redeemBtn.onclick = function() {
+                                        // Get username and licenseKey from inputs
+                                        const redeemUsernameInput = document.getElementById('redeemUsername');
+                                        const usernameFieldContainer = document.getElementById('usernameFieldContainer');
+                                        const licenseKeyInput = document.getElementById('licenseKey');
+                                        
+                                        let username = '';
+                                        if (usernameFieldContainer && usernameFieldContainer.style.display === 'none') {
+                                            // Username field is hidden, get from localStorage
+                                            const userData = localStorage.getItem('vision_user_data');
+                                            if (userData) {
+                                                const data = JSON.parse(userData);
+                                                username = data.username || '';
+                                            }
+                                        } else {
+                                            // Username field is visible, get from input
+                                            username = redeemUsernameInput ? redeemUsernameInput.value.trim() : '';
+                                        }
+                                        
+                                        const licenseKey = licenseKeyInput ? licenseKeyInput.value.trim() : '';
+                                        
+                                        // Save subscription info to localStorage
+                                        localStorage.setItem('fortnite_subscription_active', 'true');
+                                        // Save activation time (current time in UTC)
+                                        localStorage.setItem('fortnite_subscription_activation_time', Date.now().toString());
+                                        if (response.expiredate && response.expiredate.trim() !== '') {
+                                            localStorage.setItem('fortnite_subscription_expiredate', response.expiredate);
+                                            console.log('Saved subscription info to localStorage - expiredate:', response.expiredate, 'activation_time:', Date.now());
+                                        } else {
+                                            // Remove expiredate if empty
+                                            localStorage.removeItem('fortnite_subscription_expiredate');
+                                            console.log('No expiredate in response, but marking subscription as active');
+                                        }
+                                        
+                                        // Save username to localStorage
+                                        const userData = {
+                                            username: username,
+                                            license: licenseKey,
+                                            isGuest: false
+                                        };
+                                        localStorage.setItem('vision_user_data', JSON.stringify(userData));
+                                        
+                                        // Log redeem action
+                                        if (typeof logHistory === 'function') {
+                                            logHistory('redeem', 'Fortnite Private');
+                                        }
+                                        
+                                        // Update button to Launch immediately after saving subscription info
+                                        // This happens when a new session starts for the product
+                                        updateRedeemButton();
+                                        
+                                        // Close modal and reload page
+                                        closeRedeemModal();
+                                        setTimeout(function() {
+                                            window.location.reload();
+                                        }, 300);
+                                    };
+                                }
+                            } else {
+                                redeemMessage.textContent = response.message;
+                                redeemMessage.className = 'px-4 py-3 rounded-lg text-sm font-medium bg-red-500/20 text-red-400 border border-red-500/30';
+                            }
+                        }
+                    } catch (e) {
+                        console.error('Error parsing response:', e, event.data);
+                        const redeemBtn = document.getElementById('redeemBtn');
+                        if (redeemBtn) {
+                            redeemBtn.disabled = false;
+                            redeemBtn.textContent = 'Redeem';
+                        }
+                    }
+                });
+            }
+        })();
+        
+        function updateUserDisplay(username, isGuest) {
+            const userDisplayName = document.getElementById('userDisplayName');
+            const userInitial = document.getElementById('userInitial');
+            if (userDisplayName) {
+                userDisplayName.textContent = username;
+            }
+            if (userInitial) {
+                if (username === 'Guest') {
+                    userInitial.textContent = 'G';
+                } else if (username && username !== 'Key Four') {
+                    // Get first letter of username and make it uppercase
+                    const firstLetter = username.charAt(0).toUpperCase();
+                    userInitial.textContent = firstLetter;
+                } else {
+                    // Default to "K" for Key Four
+                    userInitial.textContent = 'K';
+                }
+            }
+        }
+        
+        // Profile Dropdown Functions
+        function toggleProfileDropdown() {
+            const dropdown = document.getElementById('profileDropdown');
+            const arrow = document.getElementById('dropdownArrow');
+            
+            if (dropdown && arrow) {
+                if (dropdown.classList.contains('opacity-0')) {
+                    // Show dropdown
+                    dropdown.classList.remove('opacity-0', 'invisible', 'translate-y-2');
+                    dropdown.classList.add('opacity-100', 'visible', 'translate-y-0');
+                    arrow.style.transform = 'rotate(180deg)';
+                } else {
+                    // Hide dropdown
+                    dropdown.classList.add('opacity-0', 'invisible', 'translate-y-2');
+                    dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                    arrow.style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+        
+        function handleHistory() {
+            // TODO: Implement history functionality
+            console.log('History clicked');
+            toggleProfileDropdown();
+        }
+        
+        function handleSessions() {
+            // TODO: Implement sessions functionality
+            console.log('Sessions clicked');
+            toggleProfileDropdown();
+        }
+        
+        function handleLogout() {
+            // Log logout action
+            if (typeof logHistory === 'function') {
+                logHistory('logout', null);
+            }
+            
+            // Set user as Guest
+            const guestData = {
+                username: 'Guest',
+                license: '',
+                isGuest: true
+            };
+            localStorage.setItem('vision_user_data', JSON.stringify(guestData));
+            localStorage.removeItem('vision_license');
+            
+            // Clear ALL product-specific subscription data (all products)
+            localStorage.removeItem('fortnite_subscription_active');
+            localStorage.removeItem('fortnite_subscription_expiredate');
+            localStorage.removeItem('fortnite_subscription_activation_time');
+            localStorage.removeItem('temporary_spoofer_subscription_active');
+            localStorage.removeItem('temporary_spoofer_subscription_expiredate');
+            localStorage.removeItem('temporary_spoofer_subscription_activation_time');
+            localStorage.removeItem('permanent_spoofer_subscription_active');
+            localStorage.removeItem('permanent_spoofer_subscription_expiredate');
+            localStorage.removeItem('permanent_spoofer_subscription_activation_time');
+            
+            // Clear all session data
+            sessionStorage.clear();
+            
+            // Hide dropdown
+            toggleProfileDropdown();
+            
+            // Reload page
+            window.location.reload();
+        }
+        
+        // History logging function
+        function logHistory(action, product) {
+            try {
+                const historyJson = localStorage.getItem('vision_history');
+                let history = [];
+                
+                if (historyJson) {
+                    try {
+                        history = JSON.parse(historyJson);
+                    } catch (e) {
+                        console.error('Error parsing history:', e);
+                        history = [];
+                    }
+                }
+                
+                // Add new entry
+                history.push({
+                    action: action,
+                    product: product || null,
+                    timestamp: Date.now().toString()
+                });
+                
+                // Keep only last 100 entries
+                if (history.length > 100) {
+                    history = history.slice(-100);
+                }
+                
+                // Save back to localStorage
+                localStorage.setItem('vision_history', JSON.stringify(history));
+            } catch (e) {
+                console.error('Error logging history:', e);
+            }
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const container = document.getElementById('profileDropdownContainer');
+            const dropdown = document.getElementById('profileDropdown');
+            if (container && dropdown && !container.contains(event.target)) {
+                if (!dropdown.classList.contains('opacity-0')) {
+                    toggleProfileDropdown();
+                }
+            }
+        });
+        
+        function redeemLicense() {
+            const redeemUsernameInput = document.getElementById('redeemUsername');
+            const usernameFieldContainer = document.getElementById('usernameFieldContainer');
+            
+            // Get username - either from input or from localStorage if field is hidden
+            let username = '';
+            if (usernameFieldContainer && usernameFieldContainer.style.display === 'none') {
+                // Username field is hidden, get from localStorage
+                const userData = localStorage.getItem('vision_user_data');
+                if (userData) {
+                    const data = JSON.parse(userData);
+                    username = data.username || '';
+                }
+            } else {
+                // Username field is visible, get from input
+                username = redeemUsernameInput ? redeemUsernameInput.value.trim() : '';
+            }
+            
+            const licenseKey = document.getElementById('licenseKey').value.trim();
+            const redeemResult = document.getElementById('redeemResult');
+            const redeemMessage = document.getElementById('redeemMessage');
+            const redeemBtn = document.getElementById('redeemBtn');
+            
+            if (!username || !licenseKey) {
+                if (redeemResult && redeemMessage) {
+                    redeemResult.classList.remove('hidden');
+                    redeemMessage.textContent = 'Please enter both username and license key.';
+                    redeemMessage.className = 'px-4 py-3 rounded-lg text-sm font-medium bg-yellow-500/20 text-yellow-400 border border-yellow-500/30';
+                }
+                return;
+            }
+            
+            // Hide previous result
+            if (redeemResult) {
+                redeemResult.classList.add('hidden');
+            }
+            
+            // Disable button during verification
+            if (redeemBtn) {
+                redeemBtn.disabled = true;
+                redeemBtn.textContent = 'Verifying...';
+            }
+            
+            console.log('Redeeming license:', licenseKey);
+            
+            // Send license to C++
+            if (window.chrome && window.chrome.webview && window.chrome.webview.postMessage) {
+                try {
+                    window.chrome.webview.postMessage(licenseKey);
+                } catch (err) {
+                    console.error('Error sending message:', err);
+                    if (redeemBtn) {
+                        redeemBtn.disabled = false;
+                        redeemBtn.textContent = 'Redeem';
+                    }
+                }
+            } else {
+                // Fallback if not in WebView2
+                alert('License verification available only in Loader application.');
+                if (redeemBtn) {
+                    redeemBtn.disabled = false;
+                    redeemBtn.textContent = 'Redeem';
+                }
+            }
+            
+            // Restore button after 3 seconds (in case of no response)
+            setTimeout(function() {
+                if (redeemBtn && redeemBtn.disabled) {
+                    redeemBtn.disabled = false;
+                    redeemBtn.textContent = 'Redeem';
+                }
+            }, 3000);
+        }
+        
+        function closeRedeemModal() {
+            document.getElementById('redeemModal').classList.remove('active');
+            document.body.style.overflow = '';
+            document.getElementById('licenseKey').value = '';
+            // Reset result display
+            const redeemResult = document.getElementById('redeemResult');
+            if (redeemResult) {
+                redeemResult.classList.add('hidden');
+            }
+            // Reset button to Redeem
+            const redeemBtn = document.getElementById('redeemBtn');
+            if (redeemBtn) {
+                redeemBtn.textContent = 'Redeem';
+                redeemBtn.onclick = redeemLicense;
+                redeemBtn.disabled = false;
+            }
+            // Reset username field visibility
+            const usernameFieldContainer = document.getElementById('usernameFieldContainer');
+            if (usernameFieldContainer) {
+                usernameFieldContainer.style.display = 'block';
+            }
+        }
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeRedeemModal();
+                closeLaunchWarningModal();
+                closeImagePreview();
+            }
+        });
+        
+        // Subscription info update
+        let subscriptionTimer = null;
+        let expiryTimestamp = null;
+        
+        // Load subscription info from localStorage on page load
+        (function() {
+            const subscriptionActive = localStorage.getItem('fortnite_subscription_active');
+            const expiredate = localStorage.getItem('fortnite_subscription_expiredate');
+            const activationTime = localStorage.getItem('fortnite_subscription_activation_time');
+            
+            if (subscriptionActive === 'true') {
+                console.log('Loading subscription info from localStorage. Active:', subscriptionActive, 'Expiredate:', expiredate, 'ActivationTime:', activationTime);
+                
+                // If activation time is missing, try to calculate it from expiredate
+                if (!activationTime && expiredate) {
+                    // Try to extract remaining time from expiredate format: "23.12.2025 20:50 (2 minutes, 59 seconds)"
+                    const timeMatch = expiredate.match(/\((\d+)\s+minutes?,\s*(\d+)\s+seconds?\)/i) || expiredate.match(/\((\d+)\s+seconds?\)/i);
+                    if (timeMatch) {
+                        let remainingMinutes = 0;
+                        let remainingSeconds = 0;
+                        if (timeMatch[2] !== undefined) {
+                            // Format: "(X minutes, Y seconds)"
+                            remainingMinutes = parseInt(timeMatch[1]);
+                            remainingSeconds = parseInt(timeMatch[2]);
+                        } else {
+                            // Format: "(Y seconds)"
+                            remainingSeconds = parseInt(timeMatch[1]);
+                        }
+                        
+                        // Parse expiry date
+                        const cleanedExpiredate = expiredate.replace(/\s*\([^)]+\)/i, '').trim();
+                        const ddmmyyyyMatch = cleanedExpiredate.match(/(\d{2})\.(\d{2})\.(\d{4})\s+(\d{2}):(\d{2})(?::(\d{2}))?/);
+                        if (ddmmyyyyMatch) {
+                            const [, day, month, year, hour, minute] = ddmmyyyyMatch;
+                            const expiryDate = new Date(Date.UTC(
+                                parseInt(year),
+                                parseInt(month) - 1,
+                                parseInt(day),
+                                parseInt(hour),
+                                parseInt(minute) + remainingMinutes,
+                                remainingSeconds
+                            ));
+                            const expiryTimestamp = expiryDate.getTime();
+                            
+                            // Calculate activation time = expiry time - remaining time
+                            const remainingTimeMs = (remainingMinutes * 60 + remainingSeconds) * 1000;
+                            const calculatedActivationTime = expiryTimestamp - remainingTimeMs;
+                            
+                            localStorage.setItem('fortnite_subscription_activation_time', calculatedActivationTime.toString());
+                            console.log('Calculated activation time from expiredate - remaining:', remainingMinutes + 'm', remainingSeconds + 's', 'activation_time:', new Date(calculatedActivationTime).toUTCString());
+                        } else {
+                            // Fallback: set to now
+                            localStorage.setItem('fortnite_subscription_activation_time', Date.now().toString());
+                            console.log('Set activation time to now (could not parse expiredate)');
+                        }
+                    } else {
+                        // No time info in expiredate, set to now
+                        localStorage.setItem('fortnite_subscription_activation_time', Date.now().toString());
+                        console.log('Set activation time to now (no time info in expiredate)');
+                    }
+                }
+                
+                if (expiredate) {
+                    updateSubscriptionInfo(expiredate);
+                } else {
+                    // Active but no expiredate - show active state without date
+                    updateSubscriptionInfo('');
+                }
+                
+                // Update redeem/launch button
+                updateRedeemButton();
+            } else {
+                // No active subscription - ensure button shows Redeem License
+                updateRedeemButton();
+            }
+        })();
+        
+        function updateSubscriptionInfo(expiredate) {
+            console.log('updateSubscriptionInfo called with expiredate:', expiredate, 'type:', typeof expiredate);
+            
+            // Show active subscription, hide no subscription
+            const noSub = document.getElementById('noSubscription');
+            const activeSub = document.getElementById('activeSubscription');
+            if (noSub) noSub.classList.add('hidden');
+            if (activeSub) activeSub.classList.remove('hidden');
+            
+            // If no expiredate or empty, just show active state without date
+            if (!expiredate || expiredate.trim() === '') {
+                console.log('No expiredate provided, showing active subscription without date');
+                const expiryDateEl = document.getElementById('expiryDate');
+                if (expiryDateEl) {
+                    expiryDateEl.textContent = 'N/A';
+                }
+                // Show time left container but with N/A
+                const timeLeftEl = document.getElementById('timeLeft');
+                if (timeLeftEl) {
+                    timeLeftEl.textContent = 'N/A';
+                }
+                return;
+            }
+            
+            // Parse expiredate (format: DD.MM.YYYY HH:MM (X minutes, Y seconds) or similar)
+            // TrashAuth returns dates in UTC format: "23.12.2025 20:50 (2 minutes, 59 seconds)"
+            let expiryDate;
+            let additionalMinutes = 0;
+            let additionalSeconds = 0;
+            
+            // Extract minutes and seconds from "(X minutes, Y seconds)" or "(Y seconds)" format
+            const timeMatch = expiredate.match(/\((\d+)\s+minutes?,\s*(\d+)\s+seconds?\)/i) || expiredate.match(/\((\d+)\s+seconds?\)/i);
+            if (timeMatch) {
+                if (timeMatch[2] !== undefined) {
+                    // Format: "(X minutes, Y seconds)"
+                    additionalMinutes = parseInt(timeMatch[1]);
+                    additionalSeconds = parseInt(timeMatch[2]);
+                } else {
+                    // Format: "(Y seconds)"
+                    additionalSeconds = parseInt(timeMatch[1]);
+                }
+                // Remove the time suffix from the date string
+                expiredate = expiredate.replace(/\s*\([^)]+\)/i, '').trim();
+                console.log('Extracted additional time - minutes:', additionalMinutes, 'seconds:', additionalSeconds, 'Cleaned expiredate:', expiredate);
+            }
+            
+            // Parse date as UTC - format: DD.MM.YYYY HH:MM
+            const ddmmyyyyMatch = expiredate.match(/(\d{2})\.(\d{2})\.(\d{4})\s+(\d{2}):(\d{2})(?::(\d{2}))?/);
+            if (ddmmyyyyMatch) {
+                const [, day, month, year, hour, minute, secondFromMatch] = ddmmyyyyMatch;
+                // Parse as UTC using Date.UTC
+                const baseSeconds = secondFromMatch ? parseInt(secondFromMatch) : 0;
+                // Create UTC date
+                expiryDate = new Date(Date.UTC(
+                    parseInt(year),
+                    parseInt(month) - 1,
+                    parseInt(day),
+                    parseInt(hour),
+                    parseInt(minute) + additionalMinutes,
+                    baseSeconds + additionalSeconds
+                ));
+                console.log('Parsed as UTC - Year:', year, 'Month:', month, 'Day:', day, 'Hour:', hour, 'Minute:', minute, '+', additionalMinutes, 'Seconds:', baseSeconds, '+', additionalSeconds);
+            } else {
+                // Fallback: try parsing as-is (but this might use local time)
+                expiryDate = new Date(expiredate);
+                if (!isNaN(expiryDate.getTime())) {
+                    // If parsed successfully, add the additional time
+                    expiryDate.setUTCMinutes(expiryDate.getUTCMinutes() + additionalMinutes);
+                    expiryDate.setUTCSeconds(expiryDate.getUTCSeconds() + additionalSeconds);
+                }
+            }
+            
+            expiryTimestamp = expiryDate.getTime();
+            
+            if (isNaN(expiryTimestamp)) {
+                console.error('Invalid expiry date format:', expiredate);
+                const expiryDateEl = document.getElementById('expiryDate');
+                if (expiryDateEl) {
+                    expiryDateEl.textContent = expiredate; // Show raw value if can't parse
+                }
+                return;
+            }
+            
+            console.log('Parsed expiry date (UTC):', expiryDate.toUTCString(), 'timestamp:', expiryTimestamp);
+            console.log('Parsed date details (UTC) - Year:', expiryDate.getUTCFullYear(), 'Month:', expiryDate.getUTCMonth() + 1, 'Day:', expiryDate.getUTCDate(), 'Hour:', expiryDate.getUTCHours(), 'Minute:', expiryDate.getUTCMinutes(), 'Seconds:', expiryDate.getUTCSeconds());
+            console.log('Current time (UTC):', new Date().toUTCString(), 'Current timestamp:', Date.now());
+            const timeUntilExpiry = expiryTimestamp - Date.now();
+            console.log('Time until expiry (ms):', timeUntilExpiry, 'Time until expiry (seconds):', timeUntilExpiry / 1000, 'Time until expiry (minutes):', timeUntilExpiry / 60000);
+            
+            // Make sure time left container is visible
+            const timeLeftContainer = document.querySelector('#activeSubscription .space-y-2');
+            if (timeLeftContainer) {
+                timeLeftContainer.style.display = 'block';
+            }
+            
+            // Update expiry date display
+            const expiryDateEl = document.getElementById('expiryDate');
+            if (expiryDateEl) {
+                expiryDateEl.textContent = formatDate(expiryDate);
+            }
+            
+            // Ensure activation time is saved (don't overwrite if it already exists)
+            const existingActivationTime = localStorage.getItem('fortnite_subscription_activation_time');
+            if (!existingActivationTime) {
+                // Calculate activation time from expiredate if possible
+                const timeMatch = expiredate.match(/\((\d+)\s+minutes?,\s*(\d+)\s+seconds?\)/i) || expiredate.match(/\((\d+)\s+seconds?\)/i);
+                if (timeMatch) {
+                    let remainingMinutes = 0;
+                    let remainingSeconds = 0;
+                    if (timeMatch[2] !== undefined) {
+                        remainingMinutes = parseInt(timeMatch[1]);
+                        remainingSeconds = parseInt(timeMatch[2]);
+                    } else {
+                        remainingSeconds = parseInt(timeMatch[1]);
+                    }
+                    const remainingTimeMs = (remainingMinutes * 60 + remainingSeconds) * 1000;
+                    const calculatedActivationTime = expiryTimestamp - remainingTimeMs;
+                    localStorage.setItem('fortnite_subscription_activation_time', calculatedActivationTime.toString());
+                    console.log('Saved activation time from expiredate:', new Date(calculatedActivationTime).toUTCString());
+                } else {
+                    // Fallback: set to now
+                    localStorage.setItem('fortnite_subscription_activation_time', Date.now().toString());
+                    console.log('Saved activation time to now (fallback)');
+                }
+            } else {
+                console.log('Activation time already exists, keeping it:', new Date(parseInt(existingActivationTime)).toUTCString());
+            }
+            
+            // Start timer to update time left
+            console.log('Calling updateTimeLeft() with expiryTimestamp:', expiryTimestamp);
+            updateTimeLeft();
+            if (subscriptionTimer) {
+                clearInterval(subscriptionTimer);
+            }
+            subscriptionTimer = setInterval(updateTimeLeft, 1000);
+            
+            // Update redeem/launch button
+            updateRedeemButton();
+        }
+        
+        function updateTimeLeft() {
+            if (!expiryTimestamp) {
+                console.log('updateTimeLeft: expiryTimestamp is not set');
+                return;
+            }
+            
+            const now = Date.now();
+            const timeLeft = expiryTimestamp - now;
+            
+            console.log('updateTimeLeft: now=', now, 'expiryTimestamp=', expiryTimestamp, 'timeLeft=', timeLeft);
+            
+            if (timeLeft <= 0) {
+                // Subscription expired
+                console.log('Subscription expired');
+                const noSub = document.getElementById('noSubscription');
+                const activeSub = document.getElementById('activeSubscription');
+                if (noSub) noSub.classList.remove('hidden');
+                if (activeSub) activeSub.classList.add('hidden');
+                
+                // Clear subscription data
+                localStorage.removeItem('fortnite_subscription_active');
+                localStorage.removeItem('fortnite_subscription_expiredate');
+                localStorage.removeItem('fortnite_subscription_activation_time');
+                
+                // Update button to Redeem License
+                updateRedeemButton();
+                
+                if (subscriptionTimer) {
+                    clearInterval(subscriptionTimer);
+                    subscriptionTimer = null;
+                }
+                return;
+            }
+            
+            // Calculate time components
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            console.log('Time components: days=', days, 'hours=', hours, 'minutes=', minutes, 'seconds=', seconds);
+            
+            // Format time left
+            let timeLeftStr = '';
+            if (days > 0) {
+                timeLeftStr = `${days}d ${hours}h ${minutes}m`;
+            } else if (hours > 0) {
+                timeLeftStr = `${hours}h ${minutes}m ${seconds}s`;
+            } else if (minutes > 0) {
+                timeLeftStr = `${minutes}m ${seconds}s`;
+            } else {
+                timeLeftStr = `${seconds}s`;
+            }
+            
+            console.log('Formatted time left:', timeLeftStr);
+            
+            // Update time left display
+            const timeLeftEl = document.getElementById('timeLeft');
+            console.log('timeLeft element:', timeLeftEl);
+            if (timeLeftEl) {
+                timeLeftEl.textContent = timeLeftStr;
+                console.log('Updated timeLeft element with:', timeLeftStr);
+            } else {
+                console.error('timeLeft element not found!');
+            }
+            
+            // Calculate progress based on elapsed time vs total subscription duration
+            // Progress bar shows how much of the subscription has elapsed (0% = start, 100% = expired)
+            
+            // Get activation time from localStorage
+            const activationTimeStr = localStorage.getItem('fortnite_subscription_activation_time');
+            let progress = 0;
+            
+            if (activationTimeStr && expiryTimestamp) {
+                const activationTime = parseInt(activationTimeStr);
+                const now = Date.now();
+                
+                // Total subscription duration = expiry time - activation time
+                const totalDuration = expiryTimestamp - activationTime;
+                
+                // Elapsed time = now - activation time
+                const elapsedTime = now - activationTime;
+                
+                // Progress = (elapsed time / total duration) * 100%
+                // This shows how much of the subscription has elapsed
+                progress = Math.max(0, Math.min(100, (elapsedTime / totalDuration) * 100));
+                
+                console.log('Progress calculation - activationTime:', new Date(activationTime).toUTCString(), 
+                           'expiryTimestamp:', new Date(expiryTimestamp).toUTCString(),
+                           'now:', new Date(now).toUTCString(),
+                           'totalDuration (ms):', totalDuration, 'totalDuration (minutes):', totalDuration / 60000,
+                           'elapsedTime (ms):', elapsedTime, 'elapsedTime (minutes):', elapsedTime / 60000,
+                           'progress:', progress.toFixed(2) + '%');
+            } else {
+                console.warn('Cannot calculate progress - missing activation time or expiry timestamp');
+                // Fallback: if we can't calculate, show 0% (just activated)
+                progress = 0;
+            }
+            
+            // Update progress bar
+            const progressEl = document.getElementById('timeProgress');
+            if (progressEl) {
+                // Progress shows elapsed time (0% = start, 100% = expired)
+                // If timeLeft <= 0, show 100% (expired)
+                const progressPercent = timeLeft > 0 ? Math.max(0, Math.min(100, progress)) : 100;
+                progressEl.style.width = progressPercent + '%';
+                
+                // Update button state periodically
+                updateRedeemButton();
+                
+                // Always use green color - set via inline style (highest priority)
+                progressEl.style.background = 'linear-gradient(to right, #10b981, #34d399)';
+                progressEl.style.backgroundColor = '#10b981'; // Fallback solid color
+                progressEl.style.backgroundImage = 'linear-gradient(to right, #10b981, #34d399)'; // Another way to set gradient
+                
+                // Remove any other color classes
+                progressEl.classList.remove('from-red-500', 'to-red-400', 'from-yellow-500', 'to-yellow-400');
+                
+                // Ensure green gradient classes are present (as backup if inline style doesn't work)
+                progressEl.classList.add('bg-gradient-to-r', 'from-emerald-500', 'to-emerald-400');
+                
+                // Ensure base classes are present
+                progressEl.classList.add('h-full', 'rounded-full', 'transition-all', 'duration-1000');
+                
+                // Force display
+                progressEl.style.display = 'block';
+                progressEl.style.visibility = 'visible';
+                progressEl.style.opacity = '1';
+                
+                console.log('Progress bar updated - width:', progressPercent + '%', 'color: green', 'style.background:', progressEl.style.background, 'computed style:', window.getComputedStyle(progressEl).background);
+            } else {
+                console.error('timeProgress element not found!');
+            }
+        }
+        
+        function formatDate(date) {
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            // Use UTC methods to display date in UTC
+            const day = date.getUTCDate();
+            const month = months[date.getUTCMonth()];
+            const year = date.getUTCFullYear();
+            const hours = String(date.getUTCHours()).padStart(2, '0');
+            const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+            const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+            return `${month} ${day}, ${year} ${hours}:${minutes}:${seconds} UTC`;
+        }
+        
+        function logoutSubscription() {
+            // Log logout action
+            if (typeof logHistory === 'function') {
+                logHistory('logout', null);
+            }
+            
+            // Set user as Guest
+            const guestData = {
+                username: 'Guest',
+                license: '',
+                isGuest: true
+            };
+            localStorage.setItem('vision_user_data', JSON.stringify(guestData));
+            localStorage.removeItem('vision_license');
+            
+            // Clear ALL product-specific subscription data (all products)
+            localStorage.removeItem('fortnite_subscription_active');
+            localStorage.removeItem('fortnite_subscription_expiredate');
+            localStorage.removeItem('fortnite_subscription_activation_time');
+            localStorage.removeItem('temporary_spoofer_subscription_active');
+            localStorage.removeItem('temporary_spoofer_subscription_expiredate');
+            localStorage.removeItem('temporary_spoofer_subscription_activation_time');
+            localStorage.removeItem('permanent_spoofer_subscription_active');
+            localStorage.removeItem('permanent_spoofer_subscription_expiredate');
+            localStorage.removeItem('permanent_spoofer_subscription_activation_time');
+            
+            // Clear all session data
+            sessionStorage.clear();
+            
+            // Stop subscription timer
+            if (subscriptionTimer) {
+                clearInterval(subscriptionTimer);
+                subscriptionTimer = null;
+            }
+            
+            // Reset expiry timestamp
+            expiryTimestamp = null;
+            
+            // Hide active subscription, show no subscription
+            const noSub = document.getElementById('noSubscription');
+            const activeSub = document.getElementById('activeSubscription');
+            if (noSub) noSub.classList.remove('hidden');
+            if (activeSub) activeSub.classList.add('hidden');
+            
+            // Update button to Redeem License
+            updateRedeemButton();
+            
+            // Update navbar display to Guest
+            updateUserDisplay('Guest', true);
+            
+            // Reload page
+            window.location.reload();
+        }
+        
+        // Window control buttons (minimize and close)
+        (function() {
+            if (!window.chrome || !window.chrome.webview) return;
+            
+            const minimizeBtn = document.getElementById('minimizeBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            
+            if (minimizeBtn) {
+                minimizeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const message = JSON.stringify({
+                        action: 'windowMinimize'
+                    });
+                    window.chrome.webview.postMessage(message);
+                });
+            }
+            
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const message = JSON.stringify({
+                        action: 'windowClose'
+                    });
+                    window.chrome.webview.postMessage(message);
+                });
+            }
+        })();
+        
+        // Check if user is already logged in on page load, or set default Guest
+        (function() {
+            const userData = localStorage.getItem('vision_user_data');
+            if (userData) {
+                const data = JSON.parse(userData);
+                updateUserDisplay(data.username || 'Guest', data.isGuest || false);
+            } else {
+                // Set default Guest if no user data
+                const guestData = {
+                    username: 'Guest',
+                    license: '',
+                    isGuest: true
+                };
+                localStorage.setItem('vision_user_data', JSON.stringify(guestData));
+                updateUserDisplay('Guest', true);
+            }
+        })();
+        
+        // Window dragging functionality for navbar
+        (function() {
+            if (!window.chrome || !window.chrome.webview) return;
+            
+            const header = document.querySelector('header');
+            if (!header) return;
+            
+            let isDragging = false;
+            let lastMoveTime = 0;
+            const moveThrottle = 4; // ~250fps for smoother dragging
+            
+            header.addEventListener('mousedown', function(e) {
+                if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+                    return;
+                }
+                
+                isDragging = true;
+                
+                const message = JSON.stringify({
+                    action: 'dragStart'
+                });
+                window.chrome.webview.postMessage(message);
+                
+                e.preventDefault();
+            });
+            
+            document.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+                
+                // Throttle move events for smoother performance
+                const now = Date.now();
+                if (now - lastMoveTime < moveThrottle) return;
+                lastMoveTime = now;
+                
+                const message = JSON.stringify({
+                    action: 'dragMove'
+                });
+                window.chrome.webview.postMessage(message);
+            });
+            
+            document.addEventListener('mouseup', function(e) {
+                if (isDragging) {
+                    isDragging = false;
+                    
+                    const message = JSON.stringify({
+                        action: 'dragEnd'
+                    });
+                    window.chrome.webview.postMessage(message);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

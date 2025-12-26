@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="preload" href="fonts/4cf2300e9c8272f7-s.p.woff2" as="font" crossorigin="" type="font/woff2"/>
+    <link rel="preload" href="fonts/93f479601ee12b01-s.p.woff2" as="font" crossorigin="" type="font/woff2"/>
+    <link rel="stylesheet" href="css/de70bee13400563f.css" data-precedence="next"/>
+    <link rel="stylesheet" href="css/a31caa6d517f7e69.css" data-precedence="next"/>
+    <title>History – Vision®</title>
+    <meta name="description" content="View your activity history and logs."/>
+    <style>
+        /* Hide scrollbar */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        html {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Canvas animation effect */
+        canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 50;
+            mix-blend-mode: screen;
+        }
+        
+        /* Disable text/image selection */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            cursor: default;
+        }
+        
+        /* Allow selection for input fields if needed */
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+        
+        /* Set cursor for clickable elements */
+        a, button, [onclick], [role="button"] {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="__variable_188709 __variable_9a8899 antialiased bg-zinc-950 text-[#ededed]">
+    <div hidden="">
+        <!--$-->
+        <!--/$-->
+    </div>
+    
+    <!-- Canvas for visual effects -->
+    <canvas id="canvas" class="fixed inset-0 pointer-events-none z-50 mix-blend-screen" style="width:100%;height:100%"></canvas>
+    
+    <!-- Navigation Header -->
+    <header class="bg-zinc-900/40 backdrop-blur-xl border-b border-zinc-800/30 sticky top-0 z-50">
+        <div class="max-w-7xl p-2 mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Left Section: Logo and Title -->
+                <a href="index.html" class="group flex items-center space-x-3">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-zinc-500/20 to-zinc-400/20 rounded-xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="relative p-2.5 bg-gradient-to-br from-zinc-500/10 to-zinc-400/10 rounded-xl border border-zinc-500/20 group-hover:border-zinc-500/40 transition-all duration-300">
+                            <div class="w-7 h-7 bg-gradient-to-br from-zinc-400 to-zinc-300 rounded-lg flex items-center justify-center">
+                                <span class="text-white text-xl font-bold transform -rotate-12">V</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden sm:block">
+                        <h1 class="text-lg font-bold text-zinc-100 group-hover:text-zinc-300 transition-colors duration-300">Vision®</h1>
+                        <p class="text-xs text-zinc-500 -mt-0.5">Unleash the power, dominate every game.</p>
+                    </div>
+                </a>
+                
+                <!-- Right Section: Navigation Buttons -->
+                <nav class="flex items-center space-x-2">
+                    <!-- Dashboard Button -->
+                    <a href="index.html" class="flex items-center justify-center space-x-0 md:space-x-2 p-2 md:px-3 md:py-2 text-sm font-medium text-zinc-300 hover:text-white bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-700 rounded-lg transition-all duration-200 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span class="hidden md:inline">Dashboard</span>
+                    </a>
+                    
+                    <!-- Settings Button -->
+                    <a href="settings.html" class="flex items-center justify-center space-x-0 md:space-x-2 p-2 md:px-3 md:py-2 text-sm font-medium text-zinc-300 hover:text-white bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-700 rounded-lg transition-all duration-200 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                            <line x1="4" y1="21" x2="4" y2="14"></line>
+                            <line x1="4" y1="10" x2="4" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12" y2="3"></line>
+                            <line x1="20" y1="21" x2="20" y2="16"></line>
+                            <line x1="20" y1="12" x2="20" y2="3"></line>
+                            <line x1="1" y1="14" x2="7" y2="14"></line>
+                            <line x1="9" y1="8" x2="15" y2="8"></line>
+                            <line x1="17" y1="16" x2="23" y2="16"></line>
+                        </svg>
+                        <span class="hidden md:inline">Settings</span>
+                    </a>
+                    
+                    <!-- Changelog Button -->
+                    <a href="changelog.html" class="flex items-center justify-center space-x-0 md:space-x-2 p-2 md:px-3 md:py-2 text-sm font-medium text-zinc-300 hover:text-white bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-700 rounded-lg transition-all duration-200 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <span class="hidden md:inline">Changelog</span>
+                    </a>
+                    
+                    <!-- Key Four Button with Dropdown -->
+                    <div class="relative group" id="profileDropdownContainer">
+                        <button id="profileButton" onclick="toggleProfileDropdown()" class="cursor-pointer group flex items-center space-x-2 pl-1 pr-2 py-1 bg-zinc-900/50 hover:bg-zinc-900 border border-zinc-800/50 hover:border-zinc-800 rounded-lg transition-all duration-200">
+                            <div class="p-1 bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-lg border border-zinc-700/50 overflow-hidden relative h-7 w-7 flex items-center justify-center">
+                                <div class="w-5 h-5 rounded bg-[#EC4899] flex items-center justify-center">
+                                    <span id="userInitial" class="text-white text-xs font-bold">K</span>
+                                </div>
+                            </div>
+                            <span id="userDisplayName" class="text-sm font-medium text-zinc-300 group-hover:text-white max-w-[100px] truncate hidden sm:block">Key Four</span>
+                            <svg id="dropdownArrow" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 text-zinc-500 group-hover:text-zinc-400 transition-transform duration-200">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800/50 rounded-xl shadow-xl opacity-0 invisible transform translate-y-2 transition-all duration-200 origin-top-right z-50">
+                            <div class="py-2">
+                                <a href="history.html" class="w-full flex items-center space-x-3 px-4 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors duration-150">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400">
+                                        <path d="M3 3v18h18"></path>
+                                        <path d="m19 9-5 5-4-4-3 3"></path>
+                                    </svg>
+                                    <span>History</span>
+                                </a>
+                                <a href="sessions.html" class="w-full flex items-center space-x-3 px-4 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors duration-150">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400">
+                                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+                                        <line x1="16" x2="16" y1="2" y2="6"></line>
+                                        <line x1="8" x2="8" y1="2" y2="6"></line>
+                                        <line x1="3" x2="21" y1="10" y2="10"></line>
+                                    </svg>
+                                    <span>Sessions</span>
+                                </a>
+                                <div class="h-px bg-zinc-800 my-1"></div>
+                                <button onclick="handleLogout()" class="w-full flex items-center space-x-3 px-4 py-2.5 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/20 transition-colors duration-150">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" x2="9" y1="12" y2="12"></line>
+                                    </svg>
+                                    <span>Logout</span>
+                        </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Window Control Buttons -->
+                    <button id="minimizeBtn" class="cursor-pointer flex items-center justify-center w-8 h-8 bg-zinc-800/50 hover:bg-zinc-700 border border-zinc-700/50 hover:border-zinc-600 rounded-lg transition-all duration-200 group" title="Minimize">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-400 group-hover:text-zinc-300">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    
+                    <button id="closeBtn" class="cursor-pointer flex items-center justify-center w-8 h-8 bg-zinc-800/50 hover:bg-red-600/20 border border-zinc-700/50 hover:border-red-600/50 rounded-lg transition-all duration-200 group" title="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-400 group-hover:text-red-400">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </nav>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500/20 to-transparent"></div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="min-h-screen pb-20 pt-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Page Title -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-zinc-100 mb-2">History</h1>
+                <p class="text-zinc-400">View your activity history and logs</p>
+            </div>
+            
+            <!-- History Container -->
+            <div id="historyContainer" class="space-y-4">
+                <!-- History entries will be dynamically loaded here -->
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="relative">
+        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-500/20 to-transparent"></div>
+        <div class="pt-8 md:pt-12 px-4">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col items-center gap-8 md:grid md:grid-cols-3 md:gap-12 mb-8">
+                    <!-- Left Section: Logo and Copyright -->
+                    <div class="flex flex-col items-center md:items-start space-y-4">
+                        <div class="group">
+                            <div class="flex items-center gap-3">
+                                <div class="relative hidden md:block w-[52px] h-[52px]">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-zinc-500/20 to-zinc-400/20 rounded-xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    <div class="relative p-2.5 bg-gradient-to-br from-zinc-500/10 to-zinc-400/10 rounded-xl border border-zinc-500/20 group-hover:border-zinc-500/40 transition-all duration-300">
+                                        <div class="w-7 h-7 bg-gradient-to-br from-zinc-400 to-zinc-300 rounded-lg flex items-center justify-center">
+                                            <span class="text-white text-xl font-bold transform -rotate-12">V</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center md:text-left min-w-[180px]">
+                                    <h2 class="text-lg font-bold text-zinc-100 group-hover:text-zinc-300 transition-colors duration-300">Vision®</h2>
+                                    <p class="text-xs text-zinc-500 -mt-0.5">© 2026 Vision®. All rights reserved.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Middle Section: Policies -->
+                    <div class="flex flex-col items-center md:items-start space-y-3 min-h-[60px] justify-center">
+                        <div class="flex flex-col items-center md:items-start gap-2">
+                            <a href="/policies/privacy" class="text-sm text-zinc-400 hover:text-zinc-400 transition-colors duration-200">Privacy Policy</a>
+                            <a href="/policies/refund" class="text-sm text-zinc-400 hover:text-zinc-400 transition-colors duration-200">Refund Policy</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Section: Social Media Icons -->
+                    <div class="flex flex-col items-center md:items-end min-h-[60px] justify-center">
+                        <div class="flex items-center gap-3 md:gap-4">
+                            <!-- Discord -->
+                            <a href="https://discord.gg/visondevelopment" target="_blank" rel="noopener noreferrer" class="p-3 bg-zinc-900/30 backdrop-blur-sm rounded-lg border border-zinc-800/30 text-zinc-400 hover:text-zinc-400 hover:border-zinc-500/20 transition-all duration-200 active:scale-95 w-10 h-10 flex items-center justify-center" aria-label="Discord">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4">
+                                    <path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.078.037c-.211.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.434 0 12.522 12.522 0 0 0-.617-1.25.077.077 0 0 0-.078-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.02.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.105 13.123 13.123 0 0 1-1.882-.9.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.1.246.199.373.293a.077.077 0 0 1-.006.128 12.516 12.516 0 0 1-1.883.898.076.076 0 0 0-.04.106c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .084.028 19.876 19.876 0 0 0 6.002-3.02.076.076 0 0 0 .031-.055c.5-5.177-.838-9.673-3.548-13.662a.061.061 0 0 0-.031-.028ZM8.02 15.334c-1.183 0-2.157-1.086-2.157-2.419 0-1.332.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.419 0 1.333-.956 2.419-2.157 2.419Zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.332.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.419 0 1.333-.947 2.419-2.157 2.419Z"></path>
+                                </svg>
+                            </a>
+                            
+                            <!-- Telegram -->
+                            <a href="#" class="p-3 bg-zinc-900/30 backdrop-blur-sm rounded-lg border border-zinc-800/30 text-zinc-400 hover:text-zinc-400 hover:border-zinc-500/20 transition-all duration-200 active:scale-95 w-10 h-10 flex items-center justify-center" aria-label="Telegram">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.479 2 12s4.48 10 10 10 10-4.479 10-10S17.52 2 12 2Zm4.83 6.47-1.92 9.06c-.14.64-.52.79-1.05.49l-2.9-2.14-1.4 1.35c-.16.16-.3.3-.6.3l.21-3.02 5.49-4.95c.24-.21-.05-.33-.37-.12l-6.78 4.27-2.92-.91c-.64-.2-.65-.64.13-.95l11.42-4.4c.53-.19.99.13.82.94Z"></path>
+                                </svg>
+                            </a>
+                            
+                            <!-- Instagram -->
+                            <a href="#" class="p-3 bg-zinc-900/30 backdrop-blur-sm rounded-lg border border-zinc-800/30 text-zinc-400 hover:text-zinc-400 hover:border-zinc-500/20 transition-all duration-200 active:scale-95 w-10 h-10 flex items-center justify-center" aria-label="Instagram">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+                                </svg>
+                            </a>
+                            
+                            <!-- YouTube -->
+                            <a href="https://www.youtube.com/@vision-development" target="_blank" rel="noopener noreferrer" class="p-3 bg-zinc-900/30 backdrop-blur-sm rounded-lg border border-zinc-800/30 text-zinc-400 hover:text-zinc-400 hover:border-zinc-500/20 transition-all duration-200 active:scale-95 w-10 h-10 flex items-center justify-center" aria-label="YouTube">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-24 bg-zinc-500/5 rounded-full blur-3xl pointer-events-none"></div>
+    </footer>
+    
+    <script>
+        // Canvas snow animation effect
+        (function() {
+            const canvas = document.getElementById('canvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+            
+            let animationId;
+            const particles = [];
+            
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            function initParticles() {
+                const particleCount = Math.floor(window.innerWidth * window.innerHeight / 25000);
+                particles.length = 0;
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: 2 * Math.random() + 0.5,
+                        speed: 1.5 * Math.random() + 0.5,
+                        wind: 0.5 * Math.random() - 0.25,
+                        opacity: 0.5 * Math.random() + 0.3
+                    });
+                }
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.radius, 0, 2 * Math.PI);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+                    ctx.fill();
+                    
+                    particle.y += particle.speed;
+                    particle.x += particle.wind;
+                    
+                    if (particle.y > canvas.height) {
+                        particle.y = -5;
+                        particle.x = Math.random() * canvas.width;
+                    }
+                    
+                    if (particle.x > canvas.width) {
+                        particle.x = 0;
+                    } else if (particle.x < 0) {
+                        particle.x = canvas.width;
+                    }
+                });
+                
+                animationId = requestAnimationFrame(animate);
+            }
+            
+            resizeCanvas();
+            initParticles();
+            animate();
+            
+            window.addEventListener('resize', function() {
+                resizeCanvas();
+                initParticles();
+            });
+        })();
+        
+        // Format date function
+        function formatDate(timestamp) {
+            if (!timestamp) return 'Never';
+            const date = new Date(parseInt(timestamp));
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const day = date.getUTCDate();
+            const month = months[date.getUTCMonth()];
+            const year = date.getUTCFullYear();
+            const hours = String(date.getUTCHours()).padStart(2, '0');
+            const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+            const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+            return `${month} ${day}, ${year} ${hours}:${minutes}:${seconds} UTC`;
+        }
+        
+        // Get icon for action type
+        function getActionIcon(actionType) {
+            switch(actionType) {
+                case 'loader_entry':
+                    return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-blue-400"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>';
+                case 'logout':
+                    return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-red-400"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>';
+                case 'redeem':
+                    return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-emerald-400"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path></svg>';
+                case 'launch':
+                    return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-purple-400"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+                default:
+                    return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>';
+            }
+        }
+        
+        // Get action description
+        function getActionDescription(actionType, product) {
+            switch(actionType) {
+                case 'loader_entry':
+                    return 'Entered Loader';
+                case 'logout':
+                    return 'Logged out';
+                case 'redeem':
+                    return `Redeemed license for ${product || 'product'}`;
+                case 'launch':
+                    return `Launched ${product || 'product'}`;
+                default:
+                    return 'Unknown action';
+            }
+        }
+        
+        // Load and display history
+        function loadHistory() {
+            const container = document.getElementById('historyContainer');
+            if (!container) return;
+            
+            // Get history from localStorage
+            const historyJson = localStorage.getItem('vision_history');
+            let history = [];
+            
+            if (historyJson) {
+                try {
+                    history = JSON.parse(historyJson);
+                } catch (e) {
+                    console.error('Error parsing history:', e);
+                    history = [];
+                }
+            }
+            
+            // Sort by timestamp (newest first)
+            history.sort((a, b) => parseInt(b.timestamp) - parseInt(a.timestamp));
+            
+            if (history.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-2xl border border-zinc-800/50 p-12 text-center">
+                        <div class="p-3 bg-zinc-800/30 rounded-xl inline-block mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-zinc-400">
+                                <path d="M3 3v18h18"></path>
+                                <path d="m19 9-5 5-4-4-3 3"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-zinc-100 mb-2">No history available</h3>
+                        <p class="text-sm text-zinc-400">Your activity history will appear here</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Display history entries
+            container.innerHTML = history.map(entry => {
+                const actionIcon = getActionIcon(entry.action);
+                const actionDescription = getActionDescription(entry.action, entry.product);
+                const formattedDate = formatDate(entry.timestamp);
+                
+                return `
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-2xl border border-zinc-800/50 p-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 p-2 bg-zinc-800/50 rounded-lg">
+                                ${actionIcon}
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-base font-semibold text-zinc-100">${actionDescription}</h3>
+                                    <span class="text-xs text-zinc-500">${formattedDate}</span>
+                                </div>
+                                ${entry.product ? `<p class="text-sm text-zinc-400">Product: <span class="text-zinc-300">${entry.product}</span></p>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Profile Dropdown Functions
+        function toggleProfileDropdown() {
+            const dropdown = document.getElementById('profileDropdown');
+            const arrow = document.getElementById('dropdownArrow');
+            
+            if (dropdown && arrow) {
+                if (dropdown.classList.contains('opacity-0')) {
+                    dropdown.classList.remove('opacity-0', 'invisible', 'translate-y-2');
+                    dropdown.classList.add('opacity-100', 'visible', 'translate-y-0');
+                    arrow.style.transform = 'rotate(180deg)';
+                } else {
+                    dropdown.classList.add('opacity-0', 'invisible', 'translate-y-2');
+                    dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                    arrow.style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+        
+        function handleLogout() {
+            // Log logout action
+            if (typeof logHistory === 'function') {
+                logHistory('logout', null);
+            }
+            
+            // Set user as Guest
+            const guestData = {
+                username: 'Guest',
+                license: '',
+                isGuest: true
+            };
+            localStorage.setItem('vision_user_data', JSON.stringify(guestData));
+            localStorage.removeItem('vision_license');
+            
+            // Clear ALL product-specific subscription data (all products)
+            localStorage.removeItem('fortnite_subscription_active');
+            localStorage.removeItem('fortnite_subscription_expiredate');
+            localStorage.removeItem('fortnite_subscription_activation_time');
+            localStorage.removeItem('temporary_spoofer_subscription_active');
+            localStorage.removeItem('temporary_spoofer_subscription_expiredate');
+            localStorage.removeItem('temporary_spoofer_subscription_activation_time');
+            localStorage.removeItem('permanent_spoofer_subscription_active');
+            localStorage.removeItem('permanent_spoofer_subscription_expiredate');
+            localStorage.removeItem('permanent_spoofer_subscription_activation_time');
+            
+            // Clear all session data
+            sessionStorage.clear();
+            
+            // Hide dropdown
+            toggleProfileDropdown();
+            
+            // Reload page
+            window.location.reload();
+        }
+        
+        // History logging function
+        function logHistory(action, product) {
+            try {
+                const historyJson = localStorage.getItem('vision_history');
+                let history = [];
+                
+                if (historyJson) {
+                    try {
+                        history = JSON.parse(historyJson);
+                    } catch (e) {
+                        console.error('Error parsing history:', e);
+                        history = [];
+                    }
+                }
+                
+                // Add new entry
+                history.push({
+                    action: action,
+                    product: product || null,
+                    timestamp: Date.now().toString()
+                });
+                
+                // Keep only last 100 entries
+                if (history.length > 100) {
+                    history = history.slice(-100);
+                }
+                
+                // Save back to localStorage
+                localStorage.setItem('vision_history', JSON.stringify(history));
+            } catch (e) {
+                console.error('Error logging history:', e);
+            }
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const container = document.getElementById('profileDropdownContainer');
+            const dropdown = document.getElementById('profileDropdown');
+            if (container && dropdown && !container.contains(event.target)) {
+                if (!dropdown.classList.contains('opacity-0')) {
+                    toggleProfileDropdown();
+                }
+            }
+        });
+        
+        // Update user display
+        function updateUserDisplay(username, isGuest) {
+            const userDisplayName = document.getElementById('userDisplayName');
+            const userInitial = document.getElementById('userInitial');
+            if (userDisplayName) {
+                userDisplayName.textContent = username;
+            }
+            if (userInitial) {
+                if (username === 'Guest') {
+                    userInitial.textContent = 'G';
+                } else if (username && username !== 'Key Four') {
+                    const firstLetter = username.charAt(0).toUpperCase();
+                    userInitial.textContent = firstLetter;
+                } else {
+                    userInitial.textContent = 'K';
+                }
+            }
+        }
+        
+        // Check if user is already logged in on page load, or set default Guest
+        (function() {
+            const userData = localStorage.getItem('vision_user_data');
+            if (userData) {
+                const data = JSON.parse(userData);
+                updateUserDisplay(data.username || 'Guest', data.isGuest || false);
+            } else {
+                const guestData = {
+                    username: 'Guest',
+                    license: '',
+                    isGuest: true
+                };
+                localStorage.setItem('vision_user_data', JSON.stringify(guestData));
+                updateUserDisplay('Guest', true);
+            }
+        })();
+        
+        // Load history on page load
+        loadHistory();
+        
+        // Disable status bar (link preview in bottom left corner)
+        // Override window.status to prevent link URLs from showing
+        Object.defineProperty(window, 'status', {
+            get: function() { return ''; },
+            set: function() { return ''; }
+        });
+        
+        // Prevent status bar updates on all mouse events
+        document.addEventListener('mouseover', function(e) {
+            window.status = '';
+            if (e.target.tagName === 'A' || e.target.closest('a') || e.target.closest('button')) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
+        
+        document.addEventListener('mousemove', function(e) {
+            window.status = '';
+        }, true);
+        
+        // Remove href attributes temporarily on hover to prevent status bar
+        document.addEventListener('mouseenter', function(e) {
+            if (e.target.tagName === 'A' && e.target.href) {
+                e.target.setAttribute('data-href-backup', e.target.href);
+                e.target.removeAttribute('href');
+            }
+        }, true);
+        
+        document.addEventListener('mouseleave', function(e) {
+            if (e.target.tagName === 'A' && e.target.hasAttribute('data-href-backup')) {
+                e.target.href = e.target.getAttribute('data-href-backup');
+                e.target.removeAttribute('data-href-backup');
+            }
+        }, true);
+        
+        // Override default link behavior
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (link && link.hasAttribute('data-href-backup')) {
+                e.preventDefault();
+                const href = link.getAttribute('data-href-backup');
+                if (href) {
+                    window.location.href = href;
+                }
+            }
+        }, true);
+        
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Disable keyboard shortcuts (DevTools, View Source, etc.)
+        document.addEventListener('keydown', function(e) {
+            // Disable F12 (DevTools)
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+I (DevTools)
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+J (Console)
+            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+C (Inspect Element)
+            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+U (View Source)
+            if (e.ctrlKey && e.key === 'U') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+S (Save Page)
+            if (e.ctrlKey && e.key === 'S') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+P (Print)
+            if (e.ctrlKey && e.key === 'P') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+P (Command Palette in DevTools)
+            if (e.ctrlKey && e.shiftKey && e.key === 'P') {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+Delete (Clear browsing data)
+            if (e.ctrlKey && e.shiftKey && e.key === 'Delete') {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        // Disable text selection via mouse drag
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Disable drag and drop
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Window control buttons
+        (function() {
+            if (!window.chrome || !window.chrome.webview) return;
+            
+            const minimizeBtn = document.getElementById('minimizeBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            
+            if (minimizeBtn) {
+                minimizeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const message = JSON.stringify({ action: 'windowMinimize' });
+                    window.chrome.webview.postMessage(message);
+                });
+            }
+            
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const message = JSON.stringify({ action: 'windowClose' });
+                    window.chrome.webview.postMessage(message);
+                });
+            }
+        })();
+        
+        // Window dragging functionality for navbar
+        (function() {
+            if (!window.chrome || !window.chrome.webview) return;
+            
+            const header = document.querySelector('header');
+            if (!header) return;
+            
+            let isDragging = false;
+            let lastMoveTime = 0;
+            const moveThrottle = 4; // ~250fps for smoother dragging
+            
+            header.addEventListener('mousedown', function(e) {
+                // Only start dragging if clicking on the header itself, not on buttons/links
+                if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+                    return;
+                }
+                
+                isDragging = true;
+                
+                // Send drag start message to C++
+                const message = JSON.stringify({
+                    action: 'dragStart'
+                });
+                window.chrome.webview.postMessage(message);
+                
+                e.preventDefault();
+            });
+            
+            document.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+                
+                // Throttle move events for smoother performance
+                const now = Date.now();
+                if (now - lastMoveTime < moveThrottle) return;
+                lastMoveTime = now;
+                
+                // Send drag move message to C++
+                const message = JSON.stringify({
+                    action: 'dragMove'
+                });
+                window.chrome.webview.postMessage(message);
+            });
+            
+            document.addEventListener('mouseup', function(e) {
+                if (isDragging) {
+                    isDragging = false;
+                    
+                    // Send drag end message to C++
+                    const message = JSON.stringify({
+                        action: 'dragEnd'
+                    });
+                    window.chrome.webview.postMessage(message);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
