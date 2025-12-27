@@ -210,7 +210,126 @@
         </div>
     </div>
     
+    <!-- Version Check Loader -->
+    <div class="loader-container" id="versionLoaderContainer" style="display: none;">
+        <div class="loader-content">
+            <img src="images/logo.png" alt="Vision Logo" class="loader-logo">
+            <div class="version-info-container" style="text-align: center; color: rgb(237, 237, 237); margin-top: 20px;">
+                <div id="currentVersionText" style="font-size: 16px; margin-bottom: 10px; font-weight: 500;">Current Version: <span id="currentVersionValue">-</span></div>
+                <div id="validationStatusText" style="font-size: 14px; margin-top: 15px; color: rgb(161, 161, 170);">Validating Version...</div>
+            </div>
+        </div>
+    </div>
+    
     <script>
+        // Function to update version check status
+        window.updateVersionStatus = function(status, details) {
+            const versionLoader = document.getElementById('versionLoaderContainer');
+            const currentVersionValue = document.getElementById('currentVersionValue');
+            const validationStatusText = document.getElementById('validationStatusText');
+            
+            if (!versionLoader || !currentVersionValue || !validationStatusText) return;
+            
+            // Show version loader and hide normal loader
+            const normalLoader = document.getElementById('loaderContainer');
+            if (normalLoader) {
+                normalLoader.style.display = 'none';
+            }
+            versionLoader.style.display = 'flex';
+            
+            switch(status) {
+                case 'current_version':
+                    if (currentVersionValue) {
+                        currentVersionValue.textContent = details || '-';
+                    }
+                    if (validationStatusText) {
+                        validationStatusText.textContent = 'Validating Version...';
+                        validationStatusText.style.color = 'rgb(161, 161, 170)';
+                    }
+                    break;
+                case 'validating':
+                    if (validationStatusText) {
+                        validationStatusText.textContent = 'Validating Version...';
+                        validationStatusText.style.color = 'rgb(161, 161, 170)';
+                    }
+                    break;
+                case 'validation_correct':
+                    if (validationStatusText) {
+                        validationStatusText.textContent = 'Validating Version: Correct';
+                        validationStatusText.style.color = 'rgb(34, 197, 94)';
+                    }
+                    setTimeout(() => {
+                        if (versionLoader) {
+                            versionLoader.style.display = 'none';
+                        }
+                        if (normalLoader) {
+                            normalLoader.style.display = 'flex';
+                        }
+                    }, 500);
+                    break;
+                case 'validation_incorrect':
+                    if (validationStatusText) {
+                        validationStatusText.textContent = 'Validating Version: Incorrect\nUpdating to version: ' + (details || '') + '...';
+                        validationStatusText.style.color = 'rgb(239, 68, 68)';
+                    }
+                    break;
+                case 'validation_failed':
+                    if (validationStatusText) {
+                        validationStatusText.textContent = 'Validating Version: Failed to connect\nContinuing with current version...';
+                        validationStatusText.style.color = 'rgb(239, 68, 68)';
+                    }
+                    setTimeout(() => {
+                        if (versionLoader) {
+                            versionLoader.style.display = 'none';
+                        }
+                        if (normalLoader) {
+                            normalLoader.style.display = 'flex';
+                        }
+                    }, 1500);
+                    break;
+                case 'downloading':
+                    if (validationStatusText) {
+                        validationStatusText.textContent = 'Downloading new version...';
+                        validationStatusText.style.color = 'rgb(161, 161, 170)';
+                    }
+                    break;
+                case 'update_complete':
+                    if (validationStatusText) {
+                        validationStatusText.textContent = 'Update complete. Launching new version...';
+                        validationStatusText.style.color = 'rgb(34, 197, 94)';
+                    }
+                    break;
+                case 'update_failed':
+                    if (validationStatusText) {
+                        validationStatusText.textContent = 'Update failed. Continuing with current version...';
+                        validationStatusText.style.color = 'rgb(239, 68, 68)';
+                    }
+                    setTimeout(() => {
+                        if (versionLoader) {
+                            versionLoader.style.display = 'none';
+                        }
+                        if (normalLoader) {
+                            normalLoader.style.display = 'flex';
+                        }
+                    }, 1500);
+                    break;
+                case 'update_url_missing':
+                    if (validationStatusText) {
+                        validationStatusText.textContent = 'Update URL not found. Continuing with current version...';
+                        validationStatusText.style.color = 'rgb(239, 68, 68)';
+                    }
+                    setTimeout(() => {
+                        if (versionLoader) {
+                            versionLoader.style.display = 'none';
+                        }
+                        if (normalLoader) {
+                            normalLoader.style.display = 'flex';
+                        }
+                    }, 1500);
+                    break;
+            }
+        };
+        
         // Hide loader immediately if user has already seen it
         (function() {
             if (sessionStorage.getItem('vision_loader_shown')) {
