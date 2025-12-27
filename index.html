@@ -210,123 +210,17 @@
         </div>
     </div>
     
-    <!-- Version Check Loader -->
-    <div class="loader-container" id="versionLoaderContainer" style="display: none;">
-        <div class="loader-content">
-            <img src="images/logo.png" alt="Vision Logo" class="loader-logo">
-            <div class="version-info-container" style="text-align: center; color: rgb(237, 237, 237); margin-top: 20px;">
-                <div id="currentVersionText" style="font-size: 16px; margin-bottom: 10px; font-weight: 500;">Current Version: <span id="currentVersionValue">-</span></div>
-                <div id="validationStatusText" style="font-size: 14px; margin-top: 15px; color: rgb(161, 161, 170);">Validating Version...</div>
-            </div>
-        </div>
-    </div>
-    
     <script>
-        // Function to update version check status
-        window.updateVersionStatus = function(status, details) {
-            const versionLoader = document.getElementById('versionLoaderContainer');
-            const currentVersionValue = document.getElementById('currentVersionValue');
-            const validationStatusText = document.getElementById('validationStatusText');
-            
-            if (!versionLoader || !currentVersionValue || !validationStatusText) return;
-            
-            // Show version loader and hide normal loader
-            const normalLoader = document.getElementById('loaderContainer');
-            if (normalLoader) {
-                normalLoader.style.display = 'none';
-            }
-            versionLoader.style.display = 'flex';
-            
-            switch(status) {
-                case 'current_version':
-                    if (currentVersionValue) {
-                        currentVersionValue.textContent = details || '-';
-                    }
-                    if (validationStatusText) {
-                        validationStatusText.textContent = 'Validating Version...';
-                        validationStatusText.style.color = 'rgb(161, 161, 170)';
-                    }
-                    break;
-                case 'validating':
-                    if (validationStatusText) {
-                        validationStatusText.textContent = 'Validating Version...';
-                        validationStatusText.style.color = 'rgb(161, 161, 170)';
-                    }
-                    break;
-                case 'validation_correct':
-                    if (validationStatusText) {
-                        validationStatusText.textContent = 'Validating Version: Correct';
-                        validationStatusText.style.color = 'rgb(34, 197, 94)';
-                    }
-                    setTimeout(() => {
-                        if (versionLoader) {
-                            versionLoader.style.display = 'none';
-                        }
-                        if (normalLoader) {
-                            normalLoader.style.display = 'flex';
-                        }
-                    }, 500);
-                    break;
-                case 'validation_incorrect':
-                    if (validationStatusText) {
-                        validationStatusText.textContent = 'Validating Version: Incorrect\nUpdating to version: ' + (details || '') + '...';
-                        validationStatusText.style.color = 'rgb(239, 68, 68)';
-                    }
-                    break;
-                case 'validation_failed':
-                    if (validationStatusText) {
-                        validationStatusText.textContent = 'Validating Version: Failed to connect\nContinuing with current version...';
-                        validationStatusText.style.color = 'rgb(239, 68, 68)';
-                    }
-                    setTimeout(() => {
-                        if (versionLoader) {
-                            versionLoader.style.display = 'none';
-                        }
-                        if (normalLoader) {
-                            normalLoader.style.display = 'flex';
-                        }
-                    }, 1500);
-                    break;
-                case 'downloading':
-                    if (validationStatusText) {
-                        validationStatusText.textContent = 'Downloading new version...';
-                        validationStatusText.style.color = 'rgb(161, 161, 170)';
-                    }
-                    break;
-                case 'update_complete':
-                    if (validationStatusText) {
-                        validationStatusText.textContent = 'Update complete. Launching new version...';
-                        validationStatusText.style.color = 'rgb(34, 197, 94)';
-                    }
-                    break;
-                case 'update_failed':
-                    if (validationStatusText) {
-                        validationStatusText.textContent = 'Update failed. Continuing with current version...';
-                        validationStatusText.style.color = 'rgb(239, 68, 68)';
-                    }
-                    setTimeout(() => {
-                        if (versionLoader) {
-                            versionLoader.style.display = 'none';
-                        }
-                        if (normalLoader) {
-                            normalLoader.style.display = 'flex';
-                        }
-                    }, 1500);
-                    break;
-                case 'update_url_missing':
-                    if (validationStatusText) {
-                        validationStatusText.textContent = 'Update URL not found. Continuing with current version...';
-                        validationStatusText.style.color = 'rgb(239, 68, 68)';
-                    }
-                    setTimeout(() => {
-                        if (versionLoader) {
-                            versionLoader.style.display = 'none';
-                        }
-                        if (normalLoader) {
-                            normalLoader.style.display = 'flex';
-                        }
-                    }, 1500);
-                    break;
+        // Store loader version
+        let loaderVersion = '1.0.0'; // Default version
+        
+        // Function to set loader version from C++
+        window.setLoaderVersion = function(version) {
+            loaderVersion = version || '1.0.0';
+            // Update progress text if loader is showing "Checking Version:"
+            const progressText = document.getElementById('progressText');
+            if (progressText && progressText.textContent.includes('Checking Version:')) {
+                progressText.textContent = 'Checking Version: ' + loaderVersion;
             }
         };
         
@@ -779,7 +673,7 @@
                 
                 // Progress stages: [text, duration in ms, start percentage, end percentage]
                 const stages = [
-                    { text: 'Downloading Assets', duration: 3000, start: 0, end: 30 },
+                    { text: 'Checking Version: ' + loaderVersion, duration: 3000, start: 0, end: 30 },
                     { text: 'Syncing with Database', duration: 2000, start: 30, end: 50 },
                     { text: 'Fetching Product Data', duration: 3000, start: 50, end: 80 },
                     { text: 'Establishing Secure Connection', duration: 2000, start: 80, end: 100 }
@@ -802,8 +696,12 @@
                     
                     const stage = stages[currentStage];
                     
-                    // Update text immediately
-                    progressText.textContent = stage.text;
+                    // Update text immediately - if it's the first stage, use current version
+                    if (currentStage === 0) {
+                        progressText.textContent = 'Checking Version: ' + loaderVersion;
+                    } else {
+                        progressText.textContent = stage.text;
+                    }
                     
                     // Animate progress bar to end of current stage
                     // Use setTimeout to ensure transition is applied
