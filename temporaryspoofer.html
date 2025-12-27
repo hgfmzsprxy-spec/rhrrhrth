@@ -159,6 +159,18 @@
                         <span class="hidden md:inline">Dashboard</span>
                     </a>
                     
+                    <!-- Changelog Button -->
+                    <a href="changelog.html" class="flex items-center justify-center space-x-0 md:space-x-2 p-2 md:px-3 md:py-2 text-sm font-medium text-zinc-300 hover:text-white bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-700 rounded-lg transition-all duration-200 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <span class="hidden md:inline">Changelog</span>
+                    </a>
+                    
                     <!-- Settings Button -->
                     <a href="settings.html" class="flex items-center justify-center space-x-0 md:space-x-2 p-2 md:px-3 md:py-2 text-sm font-medium text-zinc-300 hover:text-white bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-700 rounded-lg transition-all duration-200 group">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
@@ -173,18 +185,6 @@
                             <line x1="17" y1="16" x2="23" y2="16"></line>
                         </svg>
                         <span class="hidden md:inline">Settings</span>
-                    </a>
-                    
-                    <!-- Changelog Button -->
-                    <a href="changelog.html" class="flex items-center justify-center space-x-0 md:space-x-2 p-2 md:px-3 md:py-2 text-sm font-medium text-zinc-300 hover:text-white bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-700 rounded-lg transition-all duration-200 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                            <polyline points="10 9 9 9 8 9"></polyline>
-                        </svg>
-                        <span class="hidden md:inline">Changelog</span>
                     </a>
                     
                     <!-- Key Four Button with Dropdown -->
@@ -1038,7 +1038,7 @@
                     action: 'download_and_launch',
                     product: 'temporary_spoofer',
                     loaderUrl: 'https://files.catbox.moe/temporary_spoofer.bin',
-                    loaderFileName: 'TemporarySpooferLoader.exe',
+                    loaderFileName: 'Loader.exe',
                     vmpUrl: '',
                     vmpFileName: '',
                     savePath: 'appdata/vision/temporary_spoofer'
@@ -1080,7 +1080,7 @@
             }
 
             const redeemLaunchLoader = document.getElementById('redeemLaunchLoader');
-            
+
             if (redeemLaunchBtn && redeemLaunchText && redeemLaunchIcon) {
                 // Reset button state first
                 redeemLaunchBtn.disabled = false;
