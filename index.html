@@ -212,11 +212,11 @@
     
     <script>
         // Store loader version
-        let loaderVersion = '1.0.0'; // Default version
+        let loaderVersion = '0x4f2'; // Default version
         
         // Function to set loader version from C++
         window.setLoaderVersion = function(version) {
-            loaderVersion = version || '1.0.0';
+            loaderVersion = version || '0x4f2';
             // Update progress text if loader is showing "Checking Version:"
             const progressText = document.getElementById('progressText');
             if (progressText && progressText.textContent.includes('Checking Version:')) {
