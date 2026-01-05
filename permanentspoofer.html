@@ -1127,19 +1127,39 @@
                 logHistory('launch', 'Permanent Spoofer');
             }
             
+            // Check if productData and loader_url are available
+            if (!productData || !productData.loader_url) {
+                alert('Product data not loaded. Please refresh the page.');
+                // Reset button state
+                if (launchBtn) {
+                    launchBtn.disabled = false;
+                    launchBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                    launchBtn.classList.add('hover:from-zinc-600/50', 'hover:to-zinc-700/50', 'hover:shadow-lg', 'cursor-pointer');
+                }
+                if (launchBtnText) {
+                    launchBtnText.classList.remove('hidden');
+                }
+                if (launchBtnLoader) {
+                    launchBtnLoader.classList.add('hidden');
+                }
+                return;
+            }
+            
+            // Extract filename from loader_url
+            const loaderUrlParts = productData.loader_url.split('/');
+            const loaderFileName = loaderUrlParts[loaderUrlParts.length - 1] || 'Loader.exe';
+            
             // C++ loader should:
             // 1. Expand savePath to full path (e.g., %LOCALAPPDATA%\vision\permanent_spoofer)
-            // 2. Download loaderUrl (.bin) and save as loaderFileName (.exe) in savePath
-            // 3. Download vmpUrl (.dll) and save as vmpFileName in same folder
+            // 2. Download loaderUrl from GitHub and save as loaderFileName in savePath
+            // 3. Extract VMProtectSDK64.dll from embedded resource to same folder
             // 4. Launch the loaderFileName
             if (window.chrome && window.chrome.webview && window.chrome.webview.postMessage) {
                 window.chrome.webview.postMessage(JSON.stringify({ 
                     action: 'download_and_launch',
                     product: 'permanent_spoofer',
-                    loaderUrl: 'https://files.catbox.moe/2qrb16.bin',
-                    loaderFileName: 'Loader.exe',
-                    vmpUrl: 'https://files.catbox.moe/d3bf2o.dll',
-                    vmpFileName: 'VMProtectSDK64.dll',
+                    loaderUrl: productData.loader_url,
+                    loaderFileName: loaderFileName,
                     savePath: 'appdata/vision/permanent_spoofer'
                 }));
                 
