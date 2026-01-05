@@ -212,16 +212,35 @@
     
     <script>
         // Store loader version
-        let loaderVersion = '0x4f2'; // Default version
+        let loaderVersion = '0x4f2'; // Default version (from C++)
+        let githubLoaderVersion = 'Loading...'; // Version from GitHub JSON
         
-        // Function to set loader version from C++
+        // Function to fetch loader version from GitHub JSON
+        async function fetchLoaderVersionFromGitHub() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/hgfmzsprxy-spec/remote_data/refs/heads/main/data.json');
+                if (!response.ok) return;
+                
+                const data = await response.json();
+                if (data.loader_version) {
+                    githubLoaderVersion = data.loader_version;
+                    // Update progress text if loader is showing "Checking Version:"
+                    const progressText = document.getElementById('progressText');
+                    if (progressText && progressText.textContent.includes('Checking Version:')) {
+                        progressText.textContent = 'Checking Version: ' + githubLoaderVersion;
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching loader version:', error);
+            }
+        }
+        
+        // Fetch version from GitHub immediately
+        fetchLoaderVersionFromGitHub();
+        
+        // Function to set loader version from C++ (kept for compatibility)
         window.setLoaderVersion = function(version) {
             loaderVersion = version || '0x4f2';
-            // Update progress text if loader is showing "Checking Version:"
-            const progressText = document.getElementById('progressText');
-            if (progressText && progressText.textContent.includes('Checking Version:')) {
-                progressText.textContent = 'Checking Version: ' + loaderVersion;
-            }
         };
         
         // Hide loader immediately if user has already seen it
@@ -1079,14 +1098,27 @@
                 // First time entering the application, show loader for 10 seconds
                 sessionStorage.setItem('vision_loader_shown', 'true');
                 
+                // Fetch loader version from GitHub before starting animation
+                // Wait for version to load, but don't wait too long (max 2 seconds)
+                Promise.race([
+                    fetchLoaderVersionFromGitHub(),
+                    new Promise(resolve => setTimeout(resolve, 2000))
+                ]).then(() => {
+                    startLoaderAnimation();
+                });
+            }
+            
+            function startLoaderAnimation() {
                 const progressBar = document.getElementById('progressBar');
                 const progressText = document.getElementById('progressText');
                 
                 if (!progressBar || !progressText) return;
                 
                 // Progress stages: [text, duration in ms, start percentage, end percentage]
+                // Use GitHub version if available, otherwise fallback to C++ version
+                const versionToShow = githubLoaderVersion !== 'Loading...' ? githubLoaderVersion : loaderVersion;
                 const stages = [
-                    { text: 'Checking Version: ' + loaderVersion, duration: 3000, start: 0, end: 30 },
+                    { text: 'Checking Version: ' + versionToShow, duration: 3000, start: 0, end: 30 },
                     { text: 'Syncing with Database', duration: 2000, start: 30, end: 50 },
                     { text: 'Fetching Product Data', duration: 3000, start: 50, end: 80 },
                     { text: 'Establishing Secure Connection', duration: 2000, start: 80, end: 100 }
@@ -1109,9 +1141,10 @@
                     
                     const stage = stages[currentStage];
                     
-                    // Update text immediately - if it's the first stage, use current version
+                    // Update text immediately - if it's the first stage, use GitHub version or fallback to C++ version
                     if (currentStage === 0) {
-                        progressText.textContent = 'Checking Version: ' + loaderVersion;
+                        const versionToShow = githubLoaderVersion !== 'Loading...' ? githubLoaderVersion : loaderVersion;
+                        progressText.textContent = 'Checking Version: ' + versionToShow;
                     } else {
                         progressText.textContent = stage.text;
                     }
