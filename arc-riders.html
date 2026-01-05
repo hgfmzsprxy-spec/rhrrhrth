@@ -2027,6 +2027,30 @@
             window.location.reload();
         }
         
+        // Download progress listener
+        (function() {
+            if (!window.chrome || !window.chrome.webview) return;
+            
+            window.chrome.webview.addEventListener('message', function(event) {
+                try {
+                    const response = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+                    
+                    // Handle download progress updates
+                    if (response.action === 'download_progress') {
+                        const launchBtnLoader = document.getElementById('launchBtnLoader');
+                        if (launchBtnLoader) {
+                            const progressSpan = launchBtnLoader.querySelector('span');
+                            if (progressSpan) {
+                                progressSpan.textContent = 'Launching ' + (response.progress || 0) + '%';
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error parsing message:', e);
+                }
+            });
+        })();
+        
         // Window control buttons (minimize and close)
         (function() {
             if (!window.chrome || !window.chrome.webview) return;

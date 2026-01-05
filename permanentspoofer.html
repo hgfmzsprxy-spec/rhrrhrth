@@ -1215,6 +1215,19 @@
                     console.log('Received message:', event.data);
                     try {
                         const response = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+                        
+                        // Handle download progress updates
+                        if (response.action === 'download_progress') {
+                            const launchBtnLoader = document.getElementById('launchBtnLoader');
+                            if (launchBtnLoader) {
+                                const progressSpan = launchBtnLoader.querySelector('span');
+                                if (progressSpan) {
+                                    progressSpan.textContent = 'Launching ' + (response.progress || 0) + '%';
+                                }
+                            }
+                            return;
+                        }
+                        
                         const redeemResult = document.getElementById('redeemResult');
                         const redeemMessage = document.getElementById('redeemMessage');
                         const redeemBtn = document.getElementById('redeemBtn');
