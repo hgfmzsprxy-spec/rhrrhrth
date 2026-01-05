@@ -158,6 +158,16 @@
                         <span class="hidden md:inline">Changelog</span>
                     </a>
                     
+                    <!-- Guides Button -->
+                    <a href="guides.html" class="flex items-center justify-center space-x-0 md:space-x-2 p-2 md:px-3 md:py-2 text-sm font-medium text-zinc-300 hover:text-white bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-700 rounded-lg transition-all duration-200 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                            <path d="M12 11v6"></path>
+                            <path d="m9 14 3-3 3 3"></path>
+                        </svg>
+                        <span class="hidden md:inline">Guides</span>
+                    </a>
+                    
                     <!-- Settings Button -->
                     <a href="settings.html" class="flex items-center justify-center space-x-0 md:space-x-2 p-2 md:px-3 md:py-2 text-sm font-medium text-zinc-300 hover:text-white bg-zinc-800/50 hover:bg-zinc-800 border border-zinc-700/50 hover:border-zinc-700 rounded-lg transition-all duration-200 group">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors">
@@ -297,7 +307,7 @@
                     <!-- Changelog Entries -->
                     <div id="changelogEntries" class="space-y-4">
                         <!-- Logs will be loaded dynamically from GitHub JSON -->
-                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -932,53 +942,53 @@
             
             if (!filterProduct || !filterStatus || !sortDate || !entriesContainer) return;
             
-            const selectedProduct = filterProduct.value;
-            const selectedStatus = filterStatus.value;
-            const sortOrder = sortDate.value;
-            
-            // Filter entries
-            const filteredEntries = Array.from(changelogEntries).filter(entry => {
-                const entryProduct = entry.getAttribute('data-product');
-                const entryStatus = entry.getAttribute('data-status');
+                const selectedProduct = filterProduct.value;
+                const selectedStatus = filterStatus.value;
+                const sortOrder = sortDate.value;
                 
-                const productMatch = selectedProduct === 'all' || entryProduct === selectedProduct;
-                const statusMatch = selectedStatus === 'all' || entryStatus === selectedStatus;
+                // Filter entries
+                const filteredEntries = Array.from(changelogEntries).filter(entry => {
+                    const entryProduct = entry.getAttribute('data-product');
+                    const entryStatus = entry.getAttribute('data-status');
+                    
+                    const productMatch = selectedProduct === 'all' || entryProduct === selectedProduct;
+                    const statusMatch = selectedStatus === 'all' || entryStatus === selectedStatus;
+                    
+                    return productMatch && statusMatch;
+                });
                 
-                return productMatch && statusMatch;
-            });
-            
-            // Sort entries by date
-            filteredEntries.sort((a, b) => {
-                const dateA = new Date(a.getAttribute('data-date'));
-                const dateB = new Date(b.getAttribute('data-date'));
+                // Sort entries by date
+                filteredEntries.sort((a, b) => {
+                    const dateA = new Date(a.getAttribute('data-date'));
+                    const dateB = new Date(b.getAttribute('data-date'));
+                    
+                    if (sortOrder === 'newest') {
+                        return dateB - dateA; // Newest first
+                    } else {
+                        return dateA - dateB; // Oldest first
+                    }
+                });
                 
-                if (sortOrder === 'newest') {
-                    return dateB - dateA; // Newest first
-                } else {
-                    return dateA - dateB; // Oldest first
-                }
-            });
-            
-            // Hide all entries first
-            changelogEntries.forEach(entry => {
-                entry.style.display = 'none';
-                entry.style.opacity = '0';
-            });
-            
-            // Show and animate filtered entries
-            filteredEntries.forEach((entry, index) => {
-                setTimeout(() => {
-                    entry.style.display = 'block';
-                    entry.style.transition = 'opacity 0.3s ease-in';
-                    entry.style.opacity = '1';
-                }, index * 50); // Stagger animation
-            });
-            
-            // Reorder entries in DOM
-            filteredEntries.forEach(entry => {
-                entriesContainer.appendChild(entry);
-            });
-        }
+                // Hide all entries first
+                changelogEntries.forEach(entry => {
+                    entry.style.display = 'none';
+                    entry.style.opacity = '0';
+                });
+                
+                // Show and animate filtered entries
+                filteredEntries.forEach((entry, index) => {
+                    setTimeout(() => {
+                        entry.style.display = 'block';
+                        entry.style.transition = 'opacity 0.3s ease-in';
+                        entry.style.opacity = '1';
+                    }, index * 50); // Stagger animation
+                });
+                
+                // Reorder entries in DOM
+                filteredEntries.forEach(entry => {
+                    entriesContainer.appendChild(entry);
+                });
+            }
         
         // Initialize changelog
         (function() {
@@ -996,11 +1006,11 @@
                 
                 // Load changelog on page load
                 loadChangelog();
-                
-                // Apply filter on button click
-                if (applyFilterBtn) {
-                    applyFilterBtn.addEventListener('click', applyFilters);
-                }
+            
+            // Apply filter on button click
+            if (applyFilterBtn) {
+                applyFilterBtn.addEventListener('click', applyFilters);
+            }
             }
         })();
         
