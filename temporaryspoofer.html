@@ -98,6 +98,41 @@
             -ms-user-select: text;
             user-select: text;
         }
+        
+        /* Image Preview Modal */
+        .image-preview-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .image-preview-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .image-preview-modal-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 95vh;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-preview-modal.active .image-preview-modal-content {
+            transform: scale(1);
+        }
     </style>
 </head>
 <body class="__variable_188709 __variable_9a8899 antialiased bg-zinc-950 text-[#ededed]">
@@ -280,10 +315,10 @@
                             <!-- Status Badge -->
                             <div class="absolute top-6 left-6">
                                 <div class="relative">
-                                    <div class="absolute inset-0 bg-yellow-500/10 blur-lg rounded-xl opacity-60"></div>
-                                    <div class="relative flex items-center space-x-2 px-4 py-2 bg-yellow-500/10 backdrop-blur-sm border border-yellow-500/30 rounded-xl">
-                                        <div class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></div>
-                                        <span class="text-xs font-bold text-yellow-400">Updating</span>
+                                    <div id="statusBadgeGlow" class="absolute inset-0 bg-yellow-500/10 blur-lg rounded-xl opacity-60"></div>
+                                    <div id="statusBadge" class="relative flex items-center space-x-2 px-4 py-2 bg-yellow-500/10 backdrop-blur-sm border border-yellow-500/30 rounded-xl">
+                                        <div id="statusDot" class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></div>
+                                        <span id="statusText" class="text-xs font-bold text-yellow-400">Loading...</span>
                                     </div>
                                 </div>
                             </div>
@@ -602,10 +637,45 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Preview Images Widget -->
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-3xl border border-zinc-800/50 overflow-hidden relative">
+                        <div class="p-6 border-b border-zinc-800/50 bg-gradient-to-r from-transparent via-zinc-500/5 to-transparent">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-zinc-500/10 rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                </div>
+                                <h2 class="text-xl font-bold text-zinc-100">Preview</h2>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-1 gap-4">
+                                <img src="images/preview/tempspoofer1.png" alt="Temporary Spoofer Preview 1" class="w-full h-auto rounded-xl cursor-pointer hover:opacity-80 transition-opacity duration-200" onclick="openImagePreview('images/preview/tempspoofer1.png', 'Temporary Spoofer Preview 1')" loading="lazy"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
+    
+    <!-- Image Preview Modal -->
+    <div id="imagePreviewModal" class="image-preview-modal" onclick="if(event.target === this) closeImagePreview()">
+        <div class="image-preview-modal-content" onclick="event.stopPropagation()">
+            <button onclick="closeImagePreview()" class="absolute top-4 right-4 p-2 hover:bg-zinc-800/50 rounded-lg transition-colors z-10 bg-zinc-900/80 backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400 hover:text-zinc-300">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <img id="previewImage" src="" alt="" class="max-w-full max-h-[90vh] w-auto h-auto rounded-lg">
+            <p id="previewImageTitle" class="mt-4 text-center text-zinc-300 text-sm"></p>
+        </div>
+    </div>
     
     <script>
         // Disable status bar (link preview in bottom left corner)
@@ -1828,6 +1898,97 @@
                 }
             });
         })();
+        
+        // Product data from GitHub JSON
+        let productData = null;
+        const PRODUCT_KEY = 'temporary_spoofer'; // Map to JSON key
+        
+        // Load product data from GitHub
+        async function loadProductData() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/hgfmzsprxy-spec/remote_data/refs/heads/main/data.json');
+                const data = await response.json();
+                
+                if (data.products && data.products[PRODUCT_KEY]) {
+                    productData = data.products[PRODUCT_KEY];
+                    updateProductInfo();
+                }
+            } catch (error) {
+                console.error('Error loading product data:', error);
+            }
+        }
+        
+        // Update product info display
+        function updateProductInfo() {
+            if (!productData) return;
+            
+            // Update Last Update
+            const lastUpdateEl = document.getElementById('lastUpdateText');
+            if (lastUpdateEl && productData.last_update) {
+                const date = new Date(productData.last_update);
+                const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                lastUpdateEl.textContent = formattedDate;
+            }
+            
+            // Update Version
+            const versionEl = document.getElementById('versionText');
+            if (versionEl && productData.version) {
+                versionEl.textContent = productData.version;
+            }
+            
+            // Update Status Badge
+            const statusText = document.getElementById('statusText');
+            const statusBadge = document.getElementById('statusBadge');
+            const statusBadgeGlow = document.getElementById('statusBadgeGlow');
+            const statusDot = document.getElementById('statusDot');
+            
+            if (statusText && productData.status) {
+                statusText.textContent = productData.status;
+                
+                // Update status badge colors based on status
+                if (productData.status === 'Undetected') {
+                    statusBadge.className = 'relative flex items-center space-x-2 px-4 py-2 bg-emerald-500/10 backdrop-blur-sm border border-emerald-500/30 rounded-xl';
+                    statusBadgeGlow.className = 'absolute inset-0 bg-emerald-500/10 blur-lg rounded-xl opacity-60';
+                    statusDot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+                    statusText.className = 'text-xs font-bold text-emerald-400';
+                } else if (productData.status === 'Updating') {
+                    statusBadge.className = 'relative flex items-center space-x-2 px-4 py-2 bg-yellow-500/10 backdrop-blur-sm border border-yellow-500/30 rounded-xl';
+                    statusBadgeGlow.className = 'absolute inset-0 bg-yellow-500/10 blur-lg rounded-xl opacity-60';
+                    statusDot.className = 'w-2 h-2 rounded-full bg-yellow-400 animate-pulse';
+                    statusText.className = 'text-xs font-bold text-yellow-400';
+                } else {
+                    statusBadge.className = 'relative flex items-center space-x-2 px-4 py-2 bg-red-500/10 backdrop-blur-sm border border-red-500/30 rounded-xl';
+                    statusBadgeGlow.className = 'absolute inset-0 bg-red-500/10 blur-lg rounded-xl opacity-60';
+                    statusDot.className = 'w-2 h-2 rounded-full bg-red-400 animate-pulse';
+                    statusText.className = 'text-xs font-bold text-red-400';
+                }
+            }
+        }
+        
+        // Load data on page load
+        loadProductData();
+        
+        // Image Preview Functions
+        function openImagePreview(imageSrc, imageTitle) {
+            const modal = document.getElementById('imagePreviewModal');
+            const previewImage = document.getElementById('previewImage');
+            const previewTitle = document.getElementById('previewImageTitle');
+            
+            if (modal && previewImage && previewTitle) {
+                previewImage.src = imageSrc;
+                previewTitle.textContent = imageTitle || '';
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        function closeImagePreview() {
+            const modal = document.getElementById('imagePreviewModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
     </script>
 </body>
 </html>

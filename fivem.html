@@ -657,32 +657,36 @@
                                 </div>
                                 <div class="flex items-baseline space-x-1 ml-2 sm:ml-4">
                                     <div class="px-3 py-1 bg-green-600/10 border border-green-600/20 rounded-lg">
-                                        <span class="text-lg sm:text-xl font-extrabold text-green-400 tracking-tight">52</span>
+                                        <span id="onlinePlayersCount" class="text-lg sm:text-xl font-extrabold text-green-400 tracking-tight">75</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Tutorials/Video Widget -->
+                    <!-- Preview Images Widget -->
                     <div class="bg-zinc-900/50 backdrop-blur-sm rounded-3xl border border-zinc-800/50 overflow-hidden relative">
                         <div class="p-6 border-b border-zinc-800/50 bg-gradient-to-r from-transparent via-zinc-500/5 to-transparent">
                             <div class="flex items-center space-x-3">
                                 <div class="p-2 bg-zinc-500/10 rounded-xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-zinc-400">
-                                        <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"></path>
-                                        <rect x="2" y="6" width="14" height="12" rx="2"></rect>
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
                                     </svg>
                                 </div>
-                                <h2 class="text-xl font-bold text-zinc-100">Tutorials</h2>
+                                <h2 class="text-xl font-bold text-zinc-100">Preview</h2>
                             </div>
                         </div>
                         <div class="p-6">
-                            <div class="aspect-video rounded-2xl overflow-hidden bg-zinc-800/50">
-                                <iframe src="https://www.youtube-nocookie.com/embed/dZNOpioB6eg?rel=0&modestbranding=1&enablejsapi=1" class="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" frameborder="0" allowfullscreen></iframe>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <img src="images/preview/fivem1.png" alt="FiveM Preview 1" class="w-full h-auto rounded-xl cursor-pointer hover:opacity-80 transition-opacity duration-200" onclick="openImagePreview('images/preview/fivem1.png', 'FiveM Preview 1')" loading="lazy"/>
+                                <img src="images/preview/fivem2.png" alt="FiveM Preview 2" class="w-full h-auto rounded-xl cursor-pointer hover:opacity-80 transition-opacity duration-200" onclick="openImagePreview('images/preview/fivem2.png', 'FiveM Preview 2')" loading="lazy"/>
+                                <img src="images/preview/fivem3.png" alt="FiveM Preview 3" class="w-full h-auto rounded-xl cursor-pointer hover:opacity-80 transition-opacity duration-200" onclick="openImagePreview('images/preview/fivem3.png', 'FiveM Preview 3')" loading="lazy"/>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -1248,6 +1252,76 @@
         
         // Load data on page load
         loadProductData();
+        
+        // Online Players Animation (Slot Machine Effect)
+        (function() {
+            const onlinePlayersEl = document.getElementById('onlinePlayersCount');
+            if (!onlinePlayersEl) return;
+            
+            let currentValue = 75; // Start value
+            let isAnimating = false;
+            
+            // Initialize with random value between 70-89
+            function getRandomValue() {
+                return Math.floor(Math.random() * 20) + 70; // 70-89
+            }
+            
+            // Slot machine animation
+            function animateToValue(targetValue) {
+                if (isAnimating) return;
+                isAnimating = true;
+                
+                const duration = 2000; // 2 seconds animation
+                const steps = 30;
+                const stepTime = duration / steps;
+                const startValue = currentValue;
+                const difference = targetValue - startValue;
+                let currentStep = 0;
+                
+                const interval = setInterval(() => {
+                    currentStep++;
+                    const progress = currentStep / steps;
+                    // Easing function for smooth animation
+                    const easeProgress = 1 - Math.pow(1 - progress, 3); // Ease out cubic
+                    
+                    // Generate random intermediate values for slot machine effect
+                    const randomOffset = Math.floor(Math.random() * 20) - 10;
+                    const intermediateValue = Math.round(startValue + (difference * easeProgress) + randomOffset);
+                    
+                    // Clamp to valid range
+                    const displayValue = Math.max(70, Math.min(89, intermediateValue));
+                    onlinePlayersEl.textContent = displayValue;
+                    
+                    if (currentStep >= steps) {
+                        clearInterval(interval);
+                        onlinePlayersEl.textContent = targetValue;
+                        currentValue = targetValue;
+                        isAnimating = false;
+                    }
+                }, stepTime);
+            }
+            
+            // Update value periodically (30-60 seconds)
+            function scheduleNextUpdate() {
+                const delay = Math.floor(Math.random() * 30000) + 30000; // 30-60 seconds
+                setTimeout(() => {
+                    const newValue = getRandomValue();
+                    // Always decrease or stay the same (as requested)
+                    const targetValue = Math.min(currentValue - 1, newValue);
+                    if (targetValue >= 70) {
+                        animateToValue(targetValue);
+                    }
+                    scheduleNextUpdate();
+                }, delay);
+            }
+            
+            // Initialize
+            currentValue = getRandomValue();
+            onlinePlayersEl.textContent = currentValue;
+            
+            // Start periodic updates
+            scheduleNextUpdate();
+        })();
         
         function executeLaunch() {
             const launchBtn = document.getElementById('launchBtn');
